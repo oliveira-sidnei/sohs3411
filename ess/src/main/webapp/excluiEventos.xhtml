@@ -1,0 +1,137 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:growl id="message" showDetail="true" />
+
+			<p:panel id="painelEvento" header="Evento à deletar">
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Nome" />
+					<p:outputLabel value="#{excluiEventoBean.eventoSelecionado.nome}" />
+
+					<p:outputLabel value="Status" />
+					<p:outputLabel
+						value="#{excluiEventoBean.eventoSelecionado.status.descricao}" />
+
+					<p:outputLabel value="Local" />
+					<p:outputLabel value="#{excluiEventoBean.eventoSelecionado.local}" />
+
+					<p:outputLabel value="Valor do Ingresso" />
+					<p:outputLabel
+						value="#{excluiEventoBean.eventoSelecionado.valorIngresso}">
+						<f:convertNumber type="currency" currencySymbol="R$"
+							locale="pt_BR" />
+					</p:outputLabel>
+
+					<p:outputLabel value="Horário" />
+					<p:outputLabel
+						value="#{excluiEventoBean.eventoSelecionado.horario}">
+						<f:convertDateTime pattern="HH:mm" />
+					</p:outputLabel>
+
+					<p:outputLabel value="Data do início" />
+					<p:outputLabel
+						value="#{excluiEventoBean.eventoSelecionado.dataInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+					</p:outputLabel>
+
+					<p:outputLabel value="Data do fim" />
+					<p:outputLabel
+						value="#{excluiEventoBean.eventoSelecionado.dataFim}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+
+					</p:outputLabel>
+
+					<p:outputLabel value="Registrado Por:" />
+					<p:outputLabel
+						value="#{excluiEventoBean.eventoSelecionado.funcionario.nome}" />
+				</p:panelGrid>
+			</p:panel>
+			<p:panel header="Tipos do evento" toggleable="true">
+				<p:dataTable
+					value="#{excluiEventoBean.eventoSelecionado.listaTipoEvento}"
+					var="te" style="width:20%;" id="tipoEventoTable">
+					<f:facet name="header">
+         			Tipos de evento
+				</f:facet>
+
+					<p:column>
+						<p:outputLabel value="#{te.descricao}" />
+					</p:column>
+
+
+				</p:dataTable>
+			</p:panel>
+
+
+			<p:panel header="Lojas associadas">
+				<p:dataGrid value="#{excluiEventoBean.lojas}" var="lj">
+
+					<p:panel header="#{lj.nome}">
+						<p:panelGrid columns="6">
+							<p:outputLabel value="Nome da Loja" />
+							<p:outputLabel value="CNPJ da Loja" />
+							<p:outputLabel value="Numero da Loja" />
+							<p:outputLabel value="Telefone da Loja" />
+							<p:outputLabel value="Email da Loja" />
+							<p:outputLabel value="Status da Loja" />
+
+
+							<p:outputLabel value="#{lj.nome}" />
+							<p:outputLabel value="#{lj.cnpj}" />
+							<p:outputLabel value="#{lj.telefone}" />
+							<p:outputLabel value="#{lj.email}" />
+							<p:outputLabel value="#{lj.numero}" />
+							<p:outputLabel value="#{lj.status.descricao}" />
+						</p:panelGrid>
+
+					</p:panel>
+				</p:dataGrid>
+
+				<p:commandButton value="Excluir" action="#{excluiEventoBean.exclui}"
+					update="message">
+					<p:confirm header="Confirmação"
+						message="Tem certeza que deseja excluir o registro?"
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+
+					</p:confirmDialog>
+				</p:commandButton>
+
+				<p:commandButton value="Cancelar"
+					action="#{excluiEventoBean.cancela}" />
+
+			</p:panel>
+			<br />
+
+		</h:form>
+		<div id="rodape">
+			<div id="rodapeLogoBB">
+				<div id="rodapeTextoBloco">
+					<div id="rodapeTextoAlinhamento">
+						<b><span> Info Sistemas <br /> Divisão de Tecnologia
+								da Informação
+						</span></b><br /> Email: ins@email.com
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+
+</html>

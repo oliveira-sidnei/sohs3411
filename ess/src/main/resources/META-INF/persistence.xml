@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+
+
+
+	<!-- Aqui são listadas todas as entidades a serem persistidas -->
+	<!-- Configurações específicas do Hibernate -->
+
+
+	<persistence-unit name="dbsysess" transaction-type="JTA">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+
+
+
+		<jta-data-source>java:/SysEssDB</jta-data-source>
+		<class>br.com.ins.core.Aluguel</class>
+		<class>br.com.ins.core.Cliente</class>
+		<class>br.com.ins.core.Despesa</class>
+		<class>br.com.ins.core.Evento</class>
+		<class>br.com.ins.core.Funcionario</class>
+		<class>br.com.ins.core.ItemAluguel</class>
+		<class>br.com.ins.core.Loja</class>
+		<class>br.com.ins.core.Lojista</class>
+		<class>br.com.ins.core.Perfil</class>
+		<class>br.com.ins.core.TipoEvento</class>
+		<class>br.com.ins.core.Usuario</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dbsysess" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="masterkey" />
+
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.enable_lazy_load_no_trans" value="true" />
+
+		</properties>
+
+	</persistence-unit>
+</persistence>
+		
+		

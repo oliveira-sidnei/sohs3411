@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+
+<h:head>
+	<title>ESS - Easy Shop System</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="fontes.css" />
+	<h:outputStylesheet library="css" name="override.css" />
+
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{request.contextPath}/resources/imagens/favicon.ico" />
+
+</h:head>
+
+
+<h:body>
+	<div id="tudo">
+		<div id="areaCabecalho">
+			<div id="areaCabecalhoNivel1">
+				<div id="areaCabecalhoEsquerda"></div>
+				<div id="tituloPagina">
+					<h1>ESS - Easy Shop System</h1>
+				</div>
+				<div id="subtituloPagina">
+					<h1>
+						Bem vindo #{login.user.nameUser}
+						<!-- #{segurancaBean.usuarioDTVM.nome.toUpperCase()} -->
+					</h1>
+				</div>
+			</div>
+			<div id="areaCabecalhoDireita">
+				<ul id="areaNavCabecalho">
+		
+				</ul>
+			</div>
+			<div id="areaCabecalhoNivel2">
+				<div id="areaCabecalhoDireitaNv2">
+					<div style="float: right; margin-right: 20px; margin-top: 7px;">
+						<span class="menu-template"> <h:outputText
+								value="#{indexBean.dataExibicao}">
+								<f:convertDateTime pattern="EEEE, dd 'de' MMMMM 'de' yyyy"
+									locale="pt_BR" timeZone="Brazil/East" />
+							</h:outputText>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div id="conteudo">
+
+			<ui:include src="_menu.xhtml" />
+
+			<ui:insert name="corpo" />
+		</div>
+
+	</div>
+</h:body>
+<div id="rodape">
+	<div id="rodapeLogoBB">
+		<div id="rodapeTextoBloco">
+			<div id="rodapeTextoAlinhamento">
+				<b><span> Info Sistemas <br /> Divisão de Tecnologia da
+						Informação
+				</span></b><br /> Email: ins@email.com
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- <div id="rodape">
+	<div id="rodapeLogoBB">
+		<div id="rodapeTextoBloco">
+			<div id="rodapeTextoAlinhamento">
+				<b><span> Info Sistemas <br /> Divisão de Tecnologia da
+						Informação
+				</span></b><br /> Email: insti@email.com.br
+			</div>
+		</div>
+	</div>
+</div>
+ -->
+</html>

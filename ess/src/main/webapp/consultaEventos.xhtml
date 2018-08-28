@@ -1,0 +1,119 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:growl id="growl" />
+			<p:panel id="painelEventos">
+
+				<p:dataTable value="#{consultaEventoBean.eventos}" var="v"
+					paginator="true" rows="10" reflow="true" id="eventosTable" widgetVar="wvEventosTable">
+					<f:facet name="header">
+           	 		Eventos
+           	 		<p:commandButton value="Cadastrar novo evento"
+							action="/cadastraEventos?faces-redirect=true" />
+					</f:facet>
+					<p:column headerText="Nome" width="5%">
+
+						<h:outputText value="#{v.nome}" style="center" />
+
+					</p:column>
+
+					<p:column headerText="Local" width="5%">
+
+						<h:outputText value="#{v.local}" style="center" />
+
+					</p:column>
+					<p:column headerText="Status" width="5%"
+						filterBy="#{v.status.descricao}">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('wvEventosTable').filter()" converter="oneMenuConverter">
+								<f:selectItem itemLabel="Selecione status do evento"
+									itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{consultaEventoBean.listaStatus}"
+									var="status" itemLabel="#{status.descricao}" itemValue="#{status.descricao}"/>
+							</p:selectOneMenu>
+						</f:facet>
+						<div class="tableElement">
+							<h:outputText value="#{v.status.descricao}" style="center" />
+						</div>
+
+					</p:column>
+					<p:column headerText="Valor" width="5%">
+						<div class="tableElement">
+							<h:outputText value="#{v.valorIngresso}" style="center">
+								<f:convertNumber type="currency" currencySymbol="R$"
+								locale="pt_BR" />
+
+							</h:outputText>
+						</div>
+					</p:column>
+					<p:column headerText="Consultar" width="1.5%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-search"
+								action="#{consultaEventoBean.actionButton(v)}" update=""
+								style="horizontal-align:center"
+								oncomplete="PF('detalhaEvento').show();" />
+
+						</div>
+					</p:column>
+					<p:column headerText="Editar" width="1.3%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-pencil"
+								action="/editaEventos.xhtml" styleClass="botoesIcones"
+								style="center">
+								<f:param name="EventoId" value="#{v.id}" />
+							</p:commandButton>
+						</div>
+					</p:column>
+					<p:column headerText="Excluir" width="1.3%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-trash"
+								action="#{consultaEventoBean.excluirEvento()}"
+								styleClass="botoesIcones" style="center">
+								<f:param name="EventoId" value="#{v.id}" />
+							</p:commandButton>
+						</div>
+					</p:column>
+
+
+
+				</p:dataTable>
+
+				<p:dialog header="#{consultaEventoBean.eventoSelecionado.nome}"
+					modal="true" widgetVar="detalhaEvento" id="dialogEvento"
+					showEffect="explode" hideEffect="explode" height="100">
+
+
+					<p:outputLabel value="#{consultaEventoBean.eventoSelecionado.nome}" />
+					<br />
+
+					<p:outputLabel
+						value="#{consultaEventoBean.eventoSelecionado.local}" />
+					<br />
+					<p:outputLabel
+						value="#{consultaEventoBean.eventoSelecionado.valorIngresso}">
+						<f:convertNumber currencyCode="BRL" type="currency" />
+
+					</p:outputLabel>
+					<br />
+					<p:commandButton value="Autorizar Evento" />
+
+				</p:dialog>
+
+			</p:panel>
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

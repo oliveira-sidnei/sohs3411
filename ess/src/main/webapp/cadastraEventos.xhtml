@@ -1,0 +1,257 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:growl id="growl" />
+
+			<p:panel id="painelCadastraEventos" header="Cadastro de eventos">
+				<h:panelGrid columns="4" width="100%"
+					columnClasses="alignTop, alignTop, alignTop">
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Nome" styleClass="Arial10PretoBold" />
+						<p:inputText value="#{cadastraEventoBean.eventoSelecionado.nome}" 
+						required="true" requiredMessage="Campo Obrigatório:Nome"/>
+
+						<p:outputLabel value="Local" styleClass="Arial10PretoBold" />
+						<p:inputText value="#{cadastraEventoBean.eventoSelecionado.local}" />
+
+						<p:outputLabel value="Valor do ingresso"
+							styleClass="Arial10PretoBold" />
+						<pe:inputNumber
+							value="#{cadastraEventoBean.eventoSelecionado.valorIngresso}"
+							decimalSeparator="," thousandSeparator="." 
+							required="true" requiredMessage="Campo Obrigatório: Valor do ingresso"/>
+
+						<p:outputLabel value="Horário" styleClass="Arial10PretoBold" />
+						<p:calendar
+							value="#{cadastraEventoBean.eventoSelecionado.horario}"
+							pattern="HH:mm" timeOnly="true" locale="pt_BR" lang="pt_BR"/>
+
+
+						<p:outputLabel value="Data de Inicio"
+							styleClass="Arial10PretoBold" />
+						<p:calendar
+							value="#{cadastraEventoBean.eventoSelecionado.dataInicio}"
+							required="true" requiredMessage="Campo Obrigatório: Data Inicio"
+							pattern="dd/MM/yyyy" mask="true"
+							mindate="#{cadastraEventoBean.dataMinima}" />
+
+
+						<p:outputLabel value="Data de Fim" styleClass="Arial10PretoBold" />
+						<p:calendar id="dataFimCalendar"
+							value="#{cadastraEventoBean.eventoSelecionado.dataFim}"
+							required="true" requiredMessage="Campo Obrigatório: Data Fim"
+							pattern="dd/MM/yyyy" mask="true"
+							mindate="#{cadastraEventoBean.dataMinima}" />
+					</h:panelGrid>
+
+					<p:panelGrid columns="3" styleClass="semBorda">
+						<p:panelGrid columns="1">
+							<p:outputLabel value="Descrição do evento" />
+
+							<p:inputTextarea rows="5" cols="50" counter="display"
+								maxlength="250" counterTemplate="{0} caracteres."
+								autoResize="false"
+								value="#{cadastraEventoBean.eventoSelecionado.descricao}" />
+							<p:outputLabel id="display" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+
+				</h:panelGrid>
+
+				<p:panel header="Tipos de evento" toggleable="true"
+					style="width:30%;" styleClass="panelInvisivel">
+
+					<p:panelGrid columns="2" styleclass="semBorda">
+
+						<p:selectOneMenu converter="oneMenuConverter"
+							value="#{cadastraEventoBean.tipoEventoSelecionado}"
+							id="comboTipoEvento">
+
+							<f:selectItem itemValue="" itemLabel="Selecione o tipo de evento" />
+							<f:selectItems value="#{cadastraEventoBean.listaTipoEvento}"
+								var="tipoEvento" itemLabel="#{tipoEvento.descricao}"
+								itemValue="#{tipoEvento}" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Adicionar"
+							update="comboTipoEvento tableTipoEvento growl"
+							action="#{cadastraEventoBean.adicionarTipoEvento}" />
+
+					</p:panelGrid>
+					<p:dataTable id="tableTipoEvento"
+						value="#{cadastraEventoBean.listaTipoEventoSelecionado}"
+						style="width:50%;" var="tipoEvento" styleClass="semBorda">
+						<p:column>
+							<p:panelGrid columns="2" styleClass="semBorda">
+								<p:outputLabel value="#{tipoEvento.descricao}" />
+								<p:commandButton
+									action="#{cadastraEventoBean.excluiTipoEvento(tipoEvento)}"
+									icon="ui-icon-trash" update="tableTipoEvento" />
+							</p:panelGrid>
+						</p:column>
+
+					</p:dataTable>
+				</p:panel>
+
+				<p:panel id="painelFuncionarioSelecionado"
+					header="Funcionário responsável">
+
+					<p:selectOneMenu id="comboFuncionarios"
+						value="#{cadastraEventoBean.eventoSelecionado.funcionario}"
+						converter="oneMenuConverter">
+
+						<p:ajax event="change" update="funcionarioInfo" />
+
+						<f:selectItem itemLabel="Selecione o funcionário" itemValue="" />
+						<f:selectItems value="#{cadastraEventoBean.listaFuncionarios}"
+							var="funcionario"
+							itemLabel="#{funcionario.matricula} | #{funcionario.nome}"
+							itemValue="#{funcionario}" />
+
+					</p:selectOneMenu>
+					<br />
+					<p:panel id="funcionarioInfo">
+
+						<p:panelGrid columns="10">
+
+							<p:outputLabel value="Nome" />
+							<p:outputLabel
+								value="#{cadastraEventoBean.eventoSelecionado.funcionario.nome}"
+								styleClass="label" />
+
+							<p:outputLabel value="CPF" />
+							<p:outputLabel
+								value="#{cadastraEventoBean.eventoSelecionado.funcionario.cpf}"
+								styleClass="label" />
+
+							<p:outputLabel value="Matricula" />
+							<p:outputLabel
+								value="#{cadastraEventoBean.eventoSelecionado.funcionario.matricula}"
+								styleClass="label" />
+
+							<p:outputLabel value="E-mail" />
+							<p:outputLabel
+								value="#{cadastraEventoBean.eventoSelecionado.funcionario.email}"
+								styleClass="label" />
+
+
+						</p:panelGrid>
+
+						<br />
+					</p:panel>
+
+				</p:panel>
+
+				<p:panel id="painelCadastraLoja" header="Adicionar Loja">
+
+					<p:selectOneMenu id="comboLojas"
+						value="#{cadastraEventoBean.lojaSelecionada}"
+						converter="oneMenuConverter">
+
+						<f:selectItem itemLabel="Selecione a loja" itemValue="" />
+						<f:selectItems value="#{cadastraEventoBean.lojas}" var="loja"
+							itemLabel="#{loja.cnpj} | #{loja.nome}" itemValue="#{loja}" />
+						<p:ajax event="change" update="lojaInfo" />
+					</p:selectOneMenu>
+					<br />
+					<p:panel id="lojaInfo">
+
+						<p:panelGrid columns="10">
+
+							<p:outputLabel value="Nome" />
+							<p:outputLabel value="#{cadastraEventoBean.lojaSelecionada.nome}"
+								styleClass="label" />
+
+							<p:outputLabel value="CNPJ" />
+							<p:outputLabel value="#{cadastraEventoBean.lojaSelecionada.cnpj}"
+								styleClass="label" />
+
+							<p:outputLabel value="Numero" />
+							<p:outputLabel
+								value="#{cadastraEventoBean.lojaSelecionada.numero}"
+								styleClass="label" />
+
+							<p:outputLabel value="Lojista" />
+							<p:outputLabel
+								value="#{cadastraEventoBean.lojaSelecionada.lojista.nome}"
+								styleClass="label" />
+
+
+						</p:panelGrid>
+
+						<br />
+
+						<p:commandButton value="Adicionar Loja"
+							update="lojasEvento painelCadastraLoja comboLojas"
+							action="#{cadastraEventoBean.incluirLoja}" />
+
+					</p:panel>
+					<br />
+					<p:dataTable id="lojasEvento" rowKey="#{loja.id}"
+						value="#{cadastraEventoBean.listaLojasSelecionadas}" var="lj"
+						styleClass="table" rowStyleClass="tableRow"
+						emptyMessage="Sem lojas vinculadas">
+
+						<p:column headerText="Nome da loja">
+							<p:outputLabel value="#{lj.nome}" />
+						</p:column>
+
+						<p:column headerText="CNPJ da Loja">
+							<p:outputLabel value="#{lj.cnpj}" />
+						</p:column>
+
+						<p:column headerText="Telefone da Loja">
+							<p:outputLabel value="#{lj.telefone}" />
+						</p:column>
+
+						<p:column headerText="Email da Loja">
+							<p:outputLabel value="#{lj.email}" />
+						</p:column>
+
+						<p:column headerText="Número da Loja">
+							<p:outputLabel value="#{lj.numero}" />
+						</p:column>
+
+						<p:column headerText="Status da Loja">
+							<p:outputLabel value="#{lj.status}" />
+						</p:column>
+					</p:dataTable>
+					<br />
+					<p:growl id="message" showDetail="true" />
+
+
+				</p:panel>
+				<p:panelGrid columns="2" styleClass="semBorda">
+					<p:commandButton value="Salvar" update="growl"
+						action="#{cadastraEventoBean.salva}" />
+
+					<p:commandButton value="Cancelar"
+						action="#{cadastraEventoBean.cancela}">
+						<p:confirm header="Confirmação"
+							message="Tem certeza que deseja cancelar o cadastro? Todos os dados digitados serão perdidos."
+							icon="ui-icon-alert" />
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+							icon="ui-icon-cancel">
+
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:commandButton>
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,122 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+
+			<p:panel id="painelCadastraLoja" header="Cadastro de lojas">
+
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Nome" />
+					<p:outputLabel value="#{excluiLojaBean.lojaSelecionada.nome}" />
+					
+					<p:outputLabel value="CNPJ" />
+					<p:outputLabel value="#{excluiLojaBean.lojaSelecionada.cnpj}" />
+					
+					<p:outputLabel value="Telefone" />
+					<p:outputLabel value="#{excluiLojaBean.lojaSelecionada.telefone}" />
+					
+					<p:outputLabel value="E-mail" />
+					<p:outputLabel value="#{excluiLojaBean.lojaSelecionada.email}" />
+
+					<p:outputLabel value="Data de Inicio" />
+					<p:outputLabel value="#{excluiLojaBean.lojaSelecionada.dataInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+					</p:outputLabel>
+
+					<p:outputLabel value="Data de Fim" />
+					<p:outputLabel value="#{excluiLojaBean.lojaSelecionada.dataFim}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+					</p:outputLabel>
+					
+						<p:outputLabel value="Status" />
+					<p:outputLabel value="#{excluiLojaBean.lojaSelecionada.status.descricao}" />
+
+
+				</p:panelGrid>
+
+			</p:panel>
+			<p:panel header="Tipos do evento" toggleable="true" collapsed="true">
+				<p:dataTable
+					value="#{excluiLojaBean.lojaSelecionada.listaTiposEvento}" var="te"
+					style="width:20%;" id="tipoEventoTable">
+					<f:facet name="header">
+         			Tipos de evento
+				</f:facet>
+
+					<p:column>
+						<p:outputLabel value="#{te.descricao}" />
+					</p:column>
+
+
+				</p:dataTable>
+			</p:panel>
+			<p:panel id="painelCadastraLojista" header="Lojista responsável">
+
+				<p:panel id="lojistasInfo">
+
+					<p:panelGrid columns="10">
+
+						<p:outputLabel value="Nome" />
+						<p:outputLabel
+							value="#{excluiLojaBean.lojaSelecionada.lojista.nome}"
+							styleClass="label" />
+
+						<p:outputLabel value="CPF" />
+						<p:outputLabel
+							value="#{excluiLojaBean.lojaSelecionada.lojista.cpf}"
+							styleClass="label" />
+
+						<p:outputLabel value="E-mail" />
+						<p:outputLabel
+							value="#{excluiLojaBean.lojaSelecionada.lojista.email}"
+							styleClass="label" />
+
+						<p:outputLabel value="Telefone" />
+						<p:outputLabel
+							value="#{excluiLojaBean.lojaSelecionada.lojista.telefone}"
+							styleClass="label" />
+
+
+					</p:panelGrid>
+
+					<br />
+
+				</p:panel>
+				<br />
+
+				<br />
+				<p:growl id="message" showDetail="true" />
+
+
+			</p:panel>
+			<p:panelGrid columns="2" styleClass="semBorda">
+				<p:commandButton value="Excluir" action="#{excluiLojaBean.exclui}" />
+
+				<p:commandButton value="Cancelar" action="#{excluiLojaBean.cancela}">
+					<p:confirm header="Confirmação"
+						message="Tem certeza que deseja cancelar o cadastro? Todos os dados digitados serão perdidos."
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						icon="ui-icon-cancel">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+			</p:panelGrid>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

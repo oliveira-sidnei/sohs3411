@@ -1,0 +1,148 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:growl id="growl" />
+			<p:panel id="painelCadastraAlugueis" header="Cadastro de alugueis">
+
+				<p:panel id="lojaInfo">
+					<p:selectOneMenu id="comboLojas"
+						value="#{cadastraAluguelBean.aluguelSelecionado.loja}"
+						converter="oneMenuConverter">
+
+						<p:ajax event="change" update="lojaInfo" />
+
+						<f:selectItem itemLabel="Selecione a loja" itemValue="" />
+						<f:selectItems value="#{cadastraAluguelBean.lojas}" var="loja"
+							itemLabel="#{loja.cnpj} | #{loja.nome}" itemValue="#{loja}" />
+
+					</p:selectOneMenu>
+					<br />
+					<br />
+
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome" />
+						<p:outputLabel
+							value="#{cadastraAluguelBean.aluguelSelecionado.loja.nome}"
+							styleClass="label" />
+
+						<p:outputLabel value="CNPJ" />
+						<p:outputLabel
+							value="#{cadastraAluguelBean.aluguelSelecionado.loja.cnpj}"
+							styleClass="label" />
+
+						<p:outputLabel value="Numero" />
+						<p:outputLabel
+							value="#{cadastraAluguelBean.aluguelSelecionado.loja.numero}"
+							styleClass="label" />
+
+						<p:outputLabel value="Lojista" />
+						<p:outputLabel
+							value="#{cadastraAluguelBean.aluguelSelecionado.loja.lojista.nome}"
+							styleClass="label" />
+
+						<p:outputLabel value="Data de vencimento" styleClass="label" />
+						<p:calendar
+							value="#{cadastraAluguelBean.aluguelSelecionado.dataVencimento}"
+							mask="true" pattern="dd/MM/yyyy"
+							mindate="#{cadastraAluguelBean.dataMinima}" />
+
+
+					</p:panelGrid>
+
+					<br />
+
+				</p:panel>
+				<br />
+				<p:growl id="message" showDetail="true" />
+				<p:panel header="Despesa" toggleable="true">
+					<p:panelGrid columns="3" styleClass="semBorda">
+						<p:selectOneMenu id="despesasDisponiveisCombo"
+							value="#{cadastraAluguelBean.despesaSelecionada}"
+							converter="oneMenuConverter">
+
+							<f:selectItem itemLabel="Selecione a despesa" itemValue="" />
+							<f:selectItems value="#{cadastraAluguelBean.listaDespesas}"
+								var="despesa" itemValue="#{despesa}"
+								itemLabel="#{despesa.descricao}" />
+						</p:selectOneMenu>
+						<p:outputLabel value = "Valor"/>
+						<pe:inputNumber id="valorItem"
+							value="#{cadastraAluguelBean.valorSelecionado}"
+							decimalSeparator="," thousandSeparator="." />
+
+						<p:commandButton value="Adicionar"
+							action="#{cadastraAluguelBean.incluiDespesa}"
+							update="form:despesasDisponiveisCombo despesasSelecionadasFieldset growl valorItem" />
+					</p:panelGrid>
+
+
+					<p:fieldset id="despesasSelecionadasFieldset"
+						legend="Despesas selecionadas" style="width:45%;margin-top:20px">
+						<p:outputPanel id="dropArea">
+							<h:outputText value="Nenhuma despesa selecionada."
+								rendered="#{empty cadastraAluguelBean.listaItensAluguel}"
+								style="font-size:24px;" />
+							<p:dataTable id="despesasSelecionadasTable" var="itemAluguel"
+								value="#{cadastraAluguelBean.listaItensAluguel}"
+								rendered="#{not empty cadastraAluguelBean.listaItensAluguel}">
+								
+								<p:column headerText="Descrição">
+									<h:outputText value="#{itemAluguel.despesa.descricao}" />
+								</p:column>
+								<p:column headerText="Valor">
+									<p:outputLabel value="#{itemAluguel.valor}">
+									<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+									</p:outputLabel>
+								</p:column>
+								<p:column headerText="Excluir" width="10%" style="center">
+									<div class="tableElement">
+										<p:commandButton icon="ui-icon-trash"
+											action="#{cadastraAluguelBean.removeDespesa(itemAluguel)}"
+											styleClass="botoesIcones" style="center"
+											update="form:despesasSelecionadasFieldset form:despesasDisponiveisCombo" />
+									</div>
+								</p:column>
+
+
+							</p:dataTable>
+						</p:outputPanel>
+					</p:fieldset>
+				</p:panel>
+				<p:panelGrid columns="2" styleClass="semBorda">
+					<p:commandButton value="Salvar" update="growl"
+						action="#{cadastraAluguelBean.salva}" />
+
+					<p:commandButton value="Cancelar"
+						action="#{cadastraAluguelBean.cancela}">
+						<p:confirm header="Confirmação"
+							message="Tem certeza que deseja cancelar o cadastro? Todos os dados digitados serão perdidos."
+							icon="ui-icon-alert" />
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+							icon="ui-icon-cancel">
+
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:commandButton>
+				</p:panelGrid>
+
+			</p:panel>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

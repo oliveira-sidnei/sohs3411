@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<p:growl id="growl" />
+
+		<p:panel id="painelFuncionarios">
+
+			<p:dataTable value="#{consultaFuncionarioBean.funcionarios}" var="f"
+				paginator="true" rows="5" reflow="true"
+				emptyMessage="Nenhum funcionário cadastrado" id="funcionariosTable"
+				widgetVar="wvFuncionariosTable">
+				<f:facet name="header">
+           	 		Funcionarios
+           	 		<p:commandButton value="Cadastrar novo funcionario"
+						action="#{consultaFuncionarioBean.cadastrarFuncionario()}" />
+				</f:facet>
+
+				<p:column headerText="Matrícula" width="5%">
+					<div class="tableElement">
+						<h:outputText value="#{f.matricula}" style="center" />
+					</div>
+				</p:column>
+				<p:column headerText="Nome" width="5%">
+
+					<h:outputText value="#{f.nome}" style="center" />
+
+				</p:column>
+
+				<p:column headerText="Telefone" width="5%">
+
+					<h:outputText value="#{f.telefone}" style="center" />
+
+				</p:column>
+
+				<p:column headerText="E-mail" width="5%">
+
+					<h:outputText value="#{f.email}" style="center" />
+
+				</p:column>
+
+				<p:column headerText="Status" width="5%" filterBy="#{f.status.descricao}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('wvFuncionariosTable').filter()"
+						converter="oneMenuConverter">
+						<f:selectItem itemLabel="Selecione status do funcionário"
+							itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItems value="#{consultaFuncionarioBean.listaStatus}"
+							var="status" itemLabel="#{status.descricao}"
+							itemValue="#{status.descricao}" />
+					</p:selectOneMenu>
+					</f:facet>
+					<div class="tableElement">
+						<h:outputText value="#{f.status.descricao}" style="center" />
+					</div>
+
+				</p:column>
+				<p:column headerText="Consultar" width="1.7%" style="center">
+					<div class="tableElement">
+						<p:commandButton icon="ui-icon-search"
+							action="#{consultaFuncionarioBean.actionButton(f)}"
+							style="horizontal-align:center" />
+
+					</div>
+				</p:column>
+				<p:column headerText="Editar" width="1.2%" style="center">
+					<div class="tableElement">
+						<p:commandButton icon="ui-icon-pencil"
+							action="#{consultaFuncionarioBean.editarFuncionario()}"
+							styleClass="botoesIcones" style="center">
+							<f:param name="FuncionarioId" value="#{f.id}" />
+						</p:commandButton>
+					</div>
+				</p:column>
+				<p:column headerText="Excluir" width="1.4%" style="center">
+					<div class="tableElement">
+						<p:commandButton icon="ui-icon-trash"
+							action="#{consultaFuncionarioBean.excluirFuncionario()}"
+							styleClass="botoesIcones" style="center">
+							<f:param name="FuncionarioId" value="#{f.id}" />
+						</p:commandButton>
+					</div>
+				</p:column>
+
+
+
+			</p:dataTable>
+
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:growl id="growl" />
+
+			<p:panel id="painelAlugueis">
+
+				<p:dataTable value="#{consultaAluguelBean.alugueis}" var="al"
+					paginator="true" rows="10" reflow="true" id="alugueisTable" widgetVar="wvAlugueisTable">
+					<f:facet name="header">
+           	 		Alugueis
+           	 		<p:commandButton value="Cadastrar novo aluguel"
+							action="/cadastraAlugueis?faces-redirect=true" />
+					</f:facet>
+					<p:column headerText="Nome da Loja" width="5%">
+
+						<h:outputText value="#{al.loja.nome}" style="center" />
+
+					</p:column>
+
+					<p:column headerText="Valor" width="5%">
+						<div class="tableElement">
+							<p:outputLabel value="#{al.valorTotal}" style="center">
+								<f:convertNumber type="currency" currencySymbol="R$"
+									locale="pt_BR" />
+
+
+							</p:outputLabel>
+
+						</div>
+					</p:column>
+
+					<p:column headerText="Data Vencimento" width="5%">
+						<div class="tableElement">
+							<h:outputText value="#{al.dataVencimento}" style="center">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</div>
+
+					</p:column>
+					
+				<p:column headerText="Status" width="5%" filterBy="#{al.status.descricao}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('wvAlugueisTable').filter()"
+						converter="oneMenuConverter">
+						<f:selectItem itemLabel="Selecione status do aluguel"
+							itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItems value="#{consultaAluguelBean.listaStatus}"
+							var="status" itemLabel="#{status.descricao}"
+							itemValue="#{status.descricao}" />
+					</p:selectOneMenu>
+					</f:facet>
+					<div class="tableElement">
+						<h:outputText value="#{al.status.descricao}" style="center" />
+					</div>
+
+				</p:column>
+					<p:column headerText="Consultar" width="1.7%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-search"
+								action="#{consultaAluguelBean.detalhaAluguel(al)}"
+								update=":form:dialogAluguel" style="horizontal-align:center"
+								oncomplete="PF('detalhaAluguel').show();" />
+
+						</div>
+					</p:column>
+					<p:column headerText="Editar" width="1.4%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-pencil"
+								action="/editaAlugueis.xhtml" styleClass="botoesIcones"
+								style="center">
+								<f:param name="AluguelId" value="#{al.id}" />
+							</p:commandButton>
+						</div>
+					</p:column>
+					<p:column headerText="Excluir" width="1.4%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-trash"
+								action="#{consultaAluguelBean.excluirAluguel()}"
+								styleClass="botoesIcones" style="center">
+								<f:param name="AluguelId" value="#{al.id}" />
+							</p:commandButton>
+						</div>
+					</p:column>
+
+
+
+				</p:dataTable>
+
+				<p:dialog
+					header="#{consultaAluguelBean.aluguelSelecionado.loja.nome}"
+					modal="true" widgetVar="detalhaAluguel" id="dialogAluguel"
+					showEffect="explode" hideEffect="explode" height="100">
+
+
+					<p:outputLabel value="Itens do aluguel" />
+					<p:dataGrid
+						value="#{consultaAluguelBean.aluguelSelecionado.listaItensAluguel}"
+						var="ia">
+
+						<p:panelGrid columns="1" styleClass="semBorda">
+							<p:outputLabel value="#{ia.despesa.descricao}" />
+							<p:outputLabel value="#{ia.valor}">
+								<f:convertNumber currencyCode="BRL" type="currency" />
+
+							</p:outputLabel>
+						</p:panelGrid>
+					</p:dataGrid>
+
+
+
+
+				</p:dialog>
+
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

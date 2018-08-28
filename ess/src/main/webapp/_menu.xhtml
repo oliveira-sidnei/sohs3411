@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<h:form id="menuForm">
+	<p:growl id="growl" />
+	<p:menubar>
+		<p:menuitem value="Inicio" url="/intranet" />
+		<p:submenu label="Cadastros">
+			<p:menuitem value="Eventos" url="/eventos" />
+			<p:menuitem value="Funcionários" url="/funcionarios" />
+			<p:menuitem value="Aluguéis" url="/alugueis" />
+			<p:menuitem value="Lojistas" url="/lojistas" />
+			<p:menuitem value="Lojas" url="/lojas" />
+		</p:submenu>
+
+		<p:menuitem value="Eventos à autorizar" url="/autorizacaoEventos" />
+
+		<p:submenu label="Relatórios" rendered="#{login.perfilDiretor}">
+			<p:menuitem value="Eventos mais procurados"
+				oncomplete="PF('wvDialogDataInputEvento').show()"
+				update="dialogDataInputEvento" />
+			<p:menuitem value="Lojas inadimplentes"
+				oncomplete="PF('wvDialogDataInput').show()" update="dialogDataInput" />
+
+			<p:menuitem value="Eventos por loja e valor"
+				oncomplete="PF('wvDialogDataInputLoja').show()"
+				update="dialogDataInputLoja" />
+
+		</p:submenu>
+		<p:submenu label="Controle de pagamento">
+			<p:menuitem value="Gerar Boleto" url="/geraBoletos" />
+
+		</p:submenu>
+
+		<p:menuitem value="Atualizar tipos" url="/tipos" />
+
+		<p:submenu label="Ferramentas" rendered="false">
+			<p:menuitem value="Backup" url="#" />
+		</p:submenu>
+		<f:facet name="options">
+			<p:commandButton value="Logout" action="#{login.logout}" />
+		</f:facet>
+	</p:menubar>
+	<p:dialog id="abrirPDF" widgetVar="abrirPDF" modal="true" header=""
+		resizable="false" position="center">
+		<pe:documentViewer id="pdfView" height="500" width="700"
+			value="#{documentController.content}" />
+	</p:dialog>
+
+	<p:dialog id="dialogDataInput" widgetVar="wvDialogDataInput"
+		modal="true" resizable="false" position="center"
+		header="Digite as datas de referência">
+		<p:panelGrid columns="2" styleClass="semBorda">
+			<p:outputLabel value="Data de início" />
+			<p:calendar mask="true" pattern="dd/MM/yyyy"
+				value="#{geraRelatorioBean.dataInicioAluguel}" />
+			<p:outputLabel value="Data de fim" />
+			<p:calendar mask="true" pattern="dd/MM/yyyy"
+				value="#{geraRelatorioBean.dataFimAluguel}" />
+			<p:commandButton value="Gera Relatório"
+				actionListener="#{documentController.geraPdfAlugueis(geraRelatorioBean.dataInicioAluguel, geraRelatorioBean.dataFimAluguel)}"
+				oncomplete="PF('abrirPDF').show(), PF('wvDialogDataInput').hide()"
+				update="pdfView abrirPDF :menuForm:growl" />
+		</p:panelGrid>
+
+	</p:dialog>
+
+	<p:dialog id="dialogDataInputEvento"
+		widgetVar="wvDialogDataInputEvento" modal="true" resizable="false"
+		position="center" header="Digite as datas de referência">
+		<p:panelGrid columns="2" styleClass="semBorda">
+			<p:outputLabel value="Data de início" />
+			<p:calendar mask="true" pattern="dd/MM/yyyy"
+				value="#{geraRelatorioBean.dataInicio}" />
+			<p:outputLabel value="Data de fim" />
+			<p:calendar mask="true" pattern="dd/MM/yyyy"
+				value="#{geraRelatorioBean.dataFim}" />
+			<p:commandButton value="Gera Relatório"
+				actionListener="#{documentController.geraPdfEventosProcurados(geraRelatorioBean.dataInicio, geraRelatorioBean.dataFim)}"
+				oncomplete="PF('abrirPDF').show(), PF('wvDialogDataInputEvento').hide()"
+				update="pdfView abrirPDF :menuForm:growl" />
+		</p:panelGrid>
+
+	</p:dialog>
+
+	<p:dialog id="dialogDataInputLoja" widgetVar="wvDialogDataInputLoja"
+		modal="true" resizable="false" position="center"
+		header="Digite as datas de referência">
+		<p:panelGrid columns="2" styleClass="semBorda">
+			<p:outputLabel value="Loja de referência" />
+
+			<p:selectOneMenu id="comboLojas"
+				value="#{geraRelatorioBean.lojaSelecionada}"
+				converter="oneMenuConverter">
+
+				<f:selectItem itemLabel="Selecione a loja" itemValue="" />
+				<f:selectItems value="#{geraRelatorioBean.lojas}" var="loja"
+					itemLabel="#{loja.cnpj} | #{loja.nome}" itemValue="#{loja}" />
+			</p:selectOneMenu>
+
+			<p:commandButton value="Gera Relatório"
+				actionListener="#{documentController.geraPdfEventosPorLoja(geraRelatorioBean.lojaSelecionada)}"
+				oncomplete="PF('abrirPDF').show(), PF('wvDialogDataInputLoja').hide()"
+				update="pdfView abrirPDF :menuForm:growl" />
+		</p:panelGrid>
+
+	</p:dialog>
+
+
+</h:form>
+</html>

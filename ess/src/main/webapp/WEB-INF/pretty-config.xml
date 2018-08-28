@@ -1,0 +1,115 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="login">
+		<pattern value="/login" />
+		<view-id value="/login.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="index">
+		<pattern value="/index" />
+		<view-id value="/index.xhtml" />
+	</url-mapping>
+	<url-mapping id="consultaEventos">
+		<pattern value="/eventos" />
+		<view-id value="/consultaEventos.xhtml" />
+	</url-mapping>
+	<url-mapping id="consultaLojistas">
+		<pattern value="/lojistas" />
+		<view-id value="/consultaLojistas.xhtml" />
+	</url-mapping>
+	<url-mapping id="consultaAlugueis">
+		<pattern value="/alugueis" />
+		<view-id value="/consultaAlugueis.xhtml" />
+	</url-mapping>
+	<url-mapping id="consultaFuncionarios">
+		<pattern value="/funcionarios" />
+		<view-id value="/consultaFuncionarios.xhtml" />
+	</url-mapping>
+	<url-mapping id="consultaLojas">
+		<pattern value="/lojas" />
+		<view-id value="/consultaLojas.xhtml" />
+	</url-mapping>
+	<url-mapping id="cadastraEventos">
+		<pattern value="/cadastros/eventos" />
+		<view-id value="/cadastraEventos.xhtml" />
+	</url-mapping>
+	<url-mapping id="cadastraFuncionarios">
+		<pattern value="/cadastros/funcionarios" />
+		<view-id value="/cadastraFuncionarios.xhtml" />
+	</url-mapping>
+	<url-mapping id="cadastraLojas">
+		<pattern value="/cadastros/lojas" />
+		<view-id value="/cadastraLojas.xhtml" />
+	</url-mapping>
+	<url-mapping id="cadastraLojistas">
+		<pattern value="/cadastros/lojistas" />
+		<view-id value="/cadastraLojistas.xhtml" />
+	</url-mapping>
+	<url-mapping id="cadastraAlugueis">
+		<pattern value="/cadastros/alugueis" />
+		<view-id value="/cadastraAlugueis.xhtml" />
+	</url-mapping>
+	<url-mapping id="editaEventos">
+		<pattern value="/edicao/eventos" />
+		<view-id value="/editaEventos.xhtml" />
+	</url-mapping>
+	<url-mapping id="editaFuncionarios">
+		<pattern value="/edicao/funcionarios" />
+		<view-id value="/editaFuncionarios.xhtml" />
+	</url-mapping>
+	<url-mapping id="editaLojas">
+		<pattern value="/edicao/lojas" />
+		<view-id value="/editaLojas.xhtml" />
+	</url-mapping>
+	<url-mapping id="editaLojistas">
+		<pattern value="/edicao/lojistas" />
+		<view-id value="/editaLojistas.xhtml" />
+	</url-mapping>
+	<url-mapping id="editaAlugueis">
+		<pattern value="/edicao/alugueis" />
+		<view-id value="/editaAlugueis.xhtml" />
+	</url-mapping>
+	<url-mapping id="excluiEventos">
+		<pattern value="/exclui/eventos" />
+		<view-id value="/excluiEventos.xhtml" />
+	</url-mapping>
+	<url-mapping id="excluiFuncionarios">
+		<pattern value="/exclui/funcionarios" />
+		<view-id value="/excluiFuncionarios.xhtml" />
+	</url-mapping>
+	<url-mapping id="excluiLojas">
+		<pattern value="/exclui/lojas" />
+		<view-id value="/excluiLojas.xhtml" />
+	</url-mapping>
+	<url-mapping id="excluiLojistas">
+		<pattern value="/exclui/lojistas" />
+		<view-id value="/excluiLojistas.xhtml" />
+	</url-mapping>
+	<url-mapping id="excluiAlugueis">
+		<pattern value="/exclui/alugueis" />
+		<view-id value="/excluiAlugueis.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="geraBoletos">
+		<pattern value="/geraBoletos" />
+		<view-id value="/geraBoletos.xhtml" />
+	</url-mapping>
+	<url-mapping id="registraTipos">
+		<pattern value="/tipos" />
+		<view-id value="/registraTipos.xhtml" />
+	</url-mapping>
+	<url-mapping id="intranetIndex">
+		<pattern value="/intranet" />
+		<view-id value="/intranetIndex.xhtml" />
+	</url-mapping>
+	<url-mapping id="autorizaEventos">
+		<pattern value="/autorizacaoEventos" />
+		<view-id value="/autorizaEventos.xhtml" />
+	</url-mapping>
+	<url-mapping id="cadastraClientes">
+		<pattern value="/clientes" />
+		<view-id value="/cadastraClientes.xhtml" />
+	</url-mapping>
+</pretty-config>

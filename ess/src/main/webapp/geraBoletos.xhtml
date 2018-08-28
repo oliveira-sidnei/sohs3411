@@ -1,0 +1,140 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:growl id="growl" />
+			<p:panel header="Suas lojas em nosso shopping">
+				<p:dataGrid value="#{geraBoletoBean.lojistaSelecionado.lojas}"
+					var="lj" layout="grid">
+					<p:panel header="#{lj.nome}" style="text-align:center"
+						styleclass="panelReduzido">
+						<p:panelGrid columns="2" styleClass="semBorda">
+							<p:outputLabel value="Nome" />
+							<p:outputLabel value="#{lj.nome}" />
+
+							<p:outputLabel value="CNPJ" />
+							<p:outputLabel value="#{lj.cnpj}" />
+
+							<p:outputLabel value="Numero" />
+							<p:outputLabel value="#{lj.numero}" />
+
+							<p:outputLabel value="Telefone" />
+							<p:outputLabel value="#{lj.telefone}" />
+
+						</p:panelGrid>
+						<p:commandButton value="Detalhar histórico financeiro"
+							action="#{geraBoletoBean.detalhaHistoricoFinanceiro(lj)}"
+							update=":form:panelBoletos" />
+					</p:panel>
+				</p:dataGrid>
+
+			</p:panel>
+
+			<p:panel header="Boletos para à loja selecionada" toggleable="true"
+				widgetVar="panelWv" id="panelBoletos" styleClass="retiraBorda">
+				<p:dataGrid value="#{geraBoletoBean.alugueis}" var="al">
+					<p:panelGrid columns="9">
+
+						<p:outputLabel value="Nome da Loja" styleClass="Arial10PretoBold" />
+						<h:outputText value="Lojista responsável"
+							styleClass="Arial10PretoBold" />
+
+						<p:outputLabel value="Valor total do aluguel "
+							styleClass="Arial10PretoBold" />
+
+						<p:outputLabel value="Data do pagamento"
+							styleClass="Arial10PretoBold" />
+
+						<p:outputLabel value="Data de vencimento"
+							styleClass="Arial10PretoBold" />
+
+						<p:outputLabel value="Status" styleClass="Arial10PretoBold" />
+
+						<p:outputLabel value="Detalhar itens do Aluguel"
+							styleClass="Arial10PretoBold" />
+
+						<p:outputLabel value="Gerar boleto" styleClass="Arial10PretoBold" />
+
+						<p:outputLabel value="Efetuar download"
+							styleClass="Arial10PretoBold" />
+
+						<h:outputText value="#{al.loja.nome}" />
+
+
+						<p:outputLabel value="#{al.loja.lojista.nome}" />
+
+
+						<p:outputLabel value="#{al.valorTotal}">
+							<f:convertNumber type="currency" currencySymbol="R$"
+								locale="pt_BR" />
+						</p:outputLabel>
+
+						<p:outputLabel value="#{al.dataPagamento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+						</p:outputLabel>
+
+						<p:outputLabel value="#{al.dataVencimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+						</p:outputLabel>
+
+						<p:outputLabel value="#{al.status.descricao}" />
+
+
+						<p:commandButton icon="ui-icon-search"
+							update=":form:dialogAluguel"
+							action="#{geraBoletoBean.detalhaAluguel(al)}"
+							oncomplete="PF('detalhaAluguel').show();" />
+
+						<p:commandButton update=":form:growl" value="Gerar boleto"
+							action="#{geraBoletoBean.geraBoleto(al)}" />
+
+						<p:commandButton ajax="false" value="Download"
+							onclick="PrimeFaces.monitorDownload(start, stop);">
+							<p:fileDownload value="#{geraBoletoBean.content}" />
+						</p:commandButton>
+
+					</p:panelGrid>
+
+
+				</p:dataGrid>
+
+
+
+			</p:panel>
+			<p:dialog modal="true" widgetVar="detalhaAluguel" id="dialogAluguel"
+				showEffect="explode" hideEffect="explode" height="100">
+				<p:outputLabel value="Itens do aluguel" />
+				<p:dataGrid
+					value="#{geraBoletoBean.aluguelSelecionado.listaItensAluguel}"
+					var="ia">
+
+					<p:panelGrid columns="2" styleClass="semBorda">
+						<p:outputLabel value="#{ia.despesa.descricao}" />
+						<p:outputLabel value="#{ia.valor}">
+							<f:convertNumber type="currency" currencySymbol="R$"
+								locale="pt_BR" />
+
+						</p:outputLabel>
+					</p:panelGrid>
+
+				</p:dataGrid>
+
+			</p:dialog>
+
+			<p:dialog id="abrirPDF" widgetVar="abrirPDF" modal="true" header=""
+				resizable="false" position="center">
+				<pe:documentViewer id="pdfView" height="500" width="700"
+					value="#{geraBoletoBean.content}" />
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

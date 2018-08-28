@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+
+			<p:panel id="painelCadastraFuncionarios"
+				header="Cadastro de Lojistas">
+				<p:panel header="Dados pessoais">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Nome" />
+						<p:outputLabel
+							value="#{excluiLojistaBean.lojistaSelecionado.nome}" />
+						<p:outputLabel value="CPF" />
+						<p:outputLabel value="#{excluiLojistaBean.lojistaSelecionado.cpf}" />
+							<p:outputLabel value="Matrícula" />
+						<p:outputLabel value="#{excluiLojistaBean.lojistaSelecionado.matricula}" />
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:panel header="Dados para contato">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="E-mail" />
+						<p:outputLabel
+							value="#{excluiLojistaBean.lojistaSelecionado.email}" />
+						<p:outputLabel value="Telefone" />
+						<p:outputLabel
+							value="#{excluiLojistaBean.lojistaSelecionado.telefone}" />
+						<p:outputLabel value="Celular" />
+						<p:outputLabel
+							value="#{excluiLojistaBean.lojistaSelecionado.celular}" />
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:commandButton value="Excluir"
+					action="#{excluiLojistaBean.exclui}">
+
+					<p:confirm header="Confirmação de Exclusão"
+						message="Tem certeza que deseja excluir o cadastro? Todos os dados digitados serão perdidos."
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						icon="ui-icon-cancel">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+
+				<p:commandButton value="Cancelar"
+					action="#{excluiLojistaBean.cancela}" />
+			</p:panel>
+
+			<p:panelGrid columns="2">
+
+			</p:panelGrid>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

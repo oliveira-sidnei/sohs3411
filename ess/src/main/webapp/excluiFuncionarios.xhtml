@@ -1,0 +1,114 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+
+			<p:panel id="painelCadastraFuncionarios"
+				header="Cadastro de Funcionarios">
+				<p:panel header="Dados pessoais">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Matrícula" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.matricula}"
+							disabled="true" />
+						<p:outputLabel value="CPF" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.cpf}" />
+						<p:outputLabel value="Nome" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.nome}" />
+
+						<p:outputLabel value="Data de Nascimento" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+						</p:outputLabel>
+						<p:outputLabel value="Status" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.status.descricao}" />
+							<p:outputLabel value = "Perfil de acesso do funcionário"/>
+							
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.usuario.perfil.descricao}" />
+
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:panel header="Dados para contato">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="E-mail" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.email}" />
+						<p:outputLabel value="Telefone" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.telefone}" />
+						<p:outputLabel value="Celular" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.celular}" />
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:panel id="painelCadastraLoja" header="Dados Locacionais">
+					<p:panelGrid columns="6">
+					
+						<p:outputLabel value="Rua" />
+						<p:outputLabel value="Numero" />
+						<p:outputLabel value="CEP" />
+						<p:outputLabel value="Bairro" />
+						<p:outputLabel value="Estado" />
+						<p:outputLabel value="Cidade" />
+
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.rua}" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.numero}" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.cep}" />
+
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.bairro}" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.estado}" />
+						<p:outputLabel
+							value="#{excluiFuncionarioBean.funcionarioSelecionado.cidade}" />
+							
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:commandButton value="Cancelar"
+					action="#{excluiFuncionarioBean.cancela}" />
+
+				<p:commandButton value="Excluir"
+					action="#{excluiFuncionarioBean.exclui}">
+					<p:confirm header="Confirmação de Exclusão"
+						message="Tem certeza que deseja excluir o cadastro? Todos os dados digitados serão perdidos."
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						icon="ui-icon-cancel">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+			</p:panel>
+
+			<p:panelGrid columns="2">
+
+			</p:panelGrid>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

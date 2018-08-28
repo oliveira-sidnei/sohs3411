@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>ess</display-name>
+	<filter>
+		<filter-name>AuthorizationFilter</filter-name>
+		<filter-class>br.com.ins.services.AuthorizationFilter</filter-class>
+	</filter>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/acessoNegado.xhtml</location>
+	</error-page>
+	<filter-mapping>
+		<filter-name>AuthorizationFilter</filter-name>
+		<url-pattern>/cadastros/*</url-pattern>
+		<url-pattern>/edicao/*</url-pattern>
+		<url-pattern>/exclui/*</url-pattern>
+		<url-pattern>/eventos</url-pattern>
+		<url-pattern>/funcionarios</url-pattern>
+		<url-pattern>/lojistas</url-pattern>
+		<url-pattern>/lojas</url-pattern>
+		<url-pattern>/alugueis</url-pattern>
+		<url-pattern>/geraBoletos</url-pattern>
+		<url-pattern>/tipos</url-pattern>
+		<url-pattern>/intranet</url-pattern>
+		<url-pattern>/autorizacaoEventos</url-pattern>
+
+
+		<url-pattern>/consultaEventos.xhtml</url-pattern>
+		<url-pattern>/consultaFuncionarios.xhtml</url-pattern>
+		<url-pattern>/consultaLojas.xhtml</url-pattern>
+		<url-pattern>/consultaLojistas.xhtml</url-pattern>
+		<url-pattern>/consultaAlugueis.xhtml</url-pattern>
+
+		<url-pattern>/cadastraEventos.xhtml</url-pattern>
+		<url-pattern>/cadastraFuncionarios.xhtml</url-pattern>
+		<url-pattern>/cadastraLojistas.xhtml</url-pattern>
+		<url-pattern>/cadastraAlugueis.xhtml</url-pattern>
+		<url-pattern>/cadastraLojas.xhtml</url-pattern>
+
+		<url-pattern>/editaEventos.xhtml</url-pattern>
+		<url-pattern>/editaFuncionarios.xhtml</url-pattern>
+		<url-pattern>/editaLojistas.xhtml</url-pattern>
+		<url-pattern>/editaAlugueis.xhtml</url-pattern>
+		<url-pattern>/editaLojas.xhtml</url-pattern>
+
+		<url-pattern>/excluiLojas.xhtml</url-pattern>
+		<url-pattern>/excluiEventos.xhtml</url-pattern>
+		<url-pattern>/excluiAlugueis.xhtml</url-pattern>
+		<url-pattern>/excluiLojistas.xhtml</url-pattern>
+		<url-pattern>/excluiFuncionarios.xhtml</url-pattern>
+
+		<url-pattern>/geraBoletos.xhtml</url-pattern>
+		<url-pattern>/registraTipos.xhtml</url-pattern>
+		<url-pattern>/intranetIndex.xhtml</url-pattern>
+		<url-pattern>/autorizaEventos.xhtml</url-pattern>
+
+
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>redmond</param-value>
+	</context-param>
+
+</web-app>

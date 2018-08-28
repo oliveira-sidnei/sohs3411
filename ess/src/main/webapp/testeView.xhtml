@@ -1,0 +1,292 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:panel header="Painel do Gestor - Nova Boleta" closable="false">
+
+				<h:panelGrid columns="2" width="100%"
+					columnClasses="alignTop, alignTop, alignTop">
+					<h:panelGrid columns="2" id="dadosBoleta">
+						<h:outputLabel value="Fundo" />
+						<p:selectOneMenu id="comboFundos"
+							value="#{gestorBean.fundoExibicao}" converter="oneMenuConverter"
+							required="true" filter="true" filterMatchMode="contains">
+
+							<p:ajax listener="#{gestorBean.onFundoSelecionado()}" />
+
+							<f:selectItem itemLabel="Selecione o fundo" itemValue="" />
+							<f:selectItems value="#{gestorBean.listaFundosOffShore}"
+								var="fundo" itemLabel="#{fundo.drive} | #{fundo.descricao}"
+								itemValue="#{fundo}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Moeda" />
+						<p:selectOneMenu id="comboMoedaCarteira" required="true"
+							value="#{gestorBean.moeda}" styleClass="">
+							<p:ajax listener="#{gestorBean.setaCarteiraFundo}" />
+							<f:selectItem noSelectionOption="true" />
+							<f:selectItems value="#{gestorBean.listaMoedasExterior}"
+								var="moeda" itemLabel="#{moeda.descricao}"
+								itemValue="#{moeda.simbolo}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Compra / Vende" />
+						<p:selectOneMenu value="#{gestorBean.ordemGestao.tipoOrdem}"
+							converter="oneMenuConverter" required="true">
+							<f:selectItem itemLabel=" " itemValue="" />
+							<f:selectItem itemLabel="Compra" itemValue="COMPRA" />
+							<f:selectItem itemLabel="Venda" itemValue="VENDA" />
+							<p:ajax listener="#{gestorBean.solicitarConta}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Tipo do Ativo" />
+						<p:selectOneMenu id="cmbTipoAtivo"
+							value="#{gestorBean.tipoAtivoSelecionado}"
+							converter="oneMenuConverter" required="true">
+
+							<p:ajax listener="#{gestorBean.onSelectTipoAtivo}" />
+
+							<f:selectItem itemLabel="Selecionar" itemValue="" />
+							<f:selectItems value="#{tipoAtivo.listaTiposNegociacao}" var="g"
+								itemLabel="#{g.descricao}" itemValue="#{g}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Ativo" />
+						<h:panelGrid columns="3" id="selecionaAtivos">
+
+							<p:selectOneMenu id="comboAtivo"
+								value="#{gestorBean.ativoSPCSelecionado}" filter="true"
+								filterMatchMode="contains" converter="oneMenuConverter"
+								rendered="#{!gestorBean.tipoAtivoSelecionado.isBond()}">
+								<p:ajax event="change" />
+								<f:selectItem itemLabel="Selecione o Ativo" itemValue="" />
+								<f:selectItems value="#{gestorBean.listaAtivosSPC}" var="ativo"
+									itemLabel="#{ativo.titulo}" itemValue="#{ativo}" />
+							</p:selectOneMenu>
+
+							<p:selectOneMenu id="comboIdent"
+								value="#{gestorBean.ativoSPCSelecionado}" filter="true"
+								filterMatchMode="contains" converter="oneMenuConverter"
+								rendered="#{gestorBean.tipoAtivoSelecionado.isBond()}">
+								<p:ajax event="change"
+									listener="#{gestorBean.buscarDisponivelEmissor()}" />
+								<f:selectItem itemLabel="Identificador" itemValue="" />
+								<f:selectItems value="#{gestorBean.listaAtivosSPC}" var="ativo"
+									itemLabel="#{ativo.tituloSec.titulo}" itemValue="#{ativo}" />
+							</p:selectOneMenu>
+
+							<p:selectOneMenu id="comboIsin"
+								value="#{gestorBean.ativoSPCSelecionado}" filter="true"
+								filterMatchMode="contains" converter="oneMenuConverter">
+								<p:ajax event="change"
+									listener="#{gestorBean.buscarDisponivelEmissor()}" />
+								<f:selectItem itemLabel="Selecione o Ativo" itemValue="" />
+								<f:selectItems value="#{gestorBean.listaAtivosSPC}" var="ativo"
+									itemLabel="#{ativo.isin}" itemValue="#{ativo}" />
+							</p:selectOneMenu>
+
+							<div class="circulo" onclick="PF('ativosGrupo').show()">+</div>
+
+						</h:panelGrid>
+
+						<h:outputLabel value="Liquidação" />
+						<p:spinner id="spLiquidacao"
+							value="#{gestorBean.ordemGestao.liquidacao}" min="0"
+							required="true" />
+
+						<h:outputLabel value="Tipo de Ordem" />
+						<h:panelGrid>
+							<p:selectOneRadio value="#{gestorBean.ordemGestao.tipoPreco}"
+								onchange="habilitaPreco()" required="true">
+								<f:selectItem itemLabel="A Mercado" itemValue="mercado" />
+								<f:selectItem itemLabel="Limitada" itemValue="limitada" />
+							</p:selectOneRadio>
+						</h:panelGrid>
+
+						<h:outputLabel value="Quantidade" />
+						<pe:inputNumber value="#{gestorBean.ordemGestao.quantidade}">
+						</pe:inputNumber>
+
+						<h:outputLabel value="PU" />
+						<pe:inputNumber value="#{gestorBean.puAtivo}"
+							onblur="validaQuantidade()">
+						</pe:inputNumber>
+
+						<h:outputLabel value="Preço" />
+						<pe:inputNumber id="preco" value="#{gestorBean.ordemGestao.preco}"
+							decimalPlaces="4" disabled="#{gestorBean.habilitado}"
+							onblur="validaQuantidade()">
+						</pe:inputNumber>
+						<p:column></p:column>
+						<p:column>
+							<p:selectBooleanCheckbox
+								value="#{gestorBean.ordemGestao.permiteDivisao}" />
+							<h:outputLabel value=" Permitir cumprir em partes" />
+						</p:column>
+						<p:column></p:column>
+						<p:column>
+							<p:selectBooleanCheckbox
+								value="#{gestorBean.ordemGestao.efetuaTranferencia}" />
+							<h:outputLabel value=" Efetuar tranferência de financeiro" />
+						</p:column>
+
+						<h:outputLabel value="Custodiante" for="comboCustodiante" />
+
+						<p:selectOneMenu id="comboCustodiante"
+							value="#{gestorBean.custodianteSelecionado}"
+							filterMatchMode="contains" converter="oneMenuConverter">
+
+
+							<f:selectItem itemLabel="Custodiante" itemValue="#{null}" />
+							<f:selectItems value="#{gestorBean.listaCustodiantesFormatado}"
+								var="custodiante" itemLabel="#{custodiante}"
+								itemValue="#{custodiante}" />
+
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Financeiro" />
+						<pe:inputNumber value="0" disabled="true" />
+
+						<p:remoteCommand name="habilitaPreco"
+							action="#{gestorBean.habilitarPreco}" />
+						<p:remoteCommand name="validaQuantidade"
+							action="#{gestorBean.validaQtdVenda}"
+							Actionlistener="#{gestorBean.verificaDisponivelEmissor}" />
+
+						<h:outputLabel value="Observações:" />
+						<p:inputTextarea value="#{gestorBean.observacaoTexto}" rows="5"
+							cols="40" />
+
+						<p:column />
+						<p:commandButton id="btCriarOrdem" value="Criar Ordem"
+							icon="ui-icon-disk" action="#{gestorBean.criarOrdem}">
+
+							<p:confirm id="conf" header="Confirmação"
+								message="Deseja Confirmar Operação?" icon="ui-icon-alert" />
+
+						</p:commandButton>
+					</h:panelGrid>
+
+					<h:panelGrid id="informacoes">
+						<p:panel header="Informações da Carteira">
+							<h:panelGrid columns="2" id="informacoesFundo"
+								columnClasses="colEsquerda, colDireita"
+								rowClasses="rowPanelGrid1, rowPanelGrid2">
+								<h:outputLabel value="Cód. Drive" />
+								<h:outputLabel value="#{gestorBean.fundoSelecionado.drive}" />
+
+								<h:outputLabel value="Caixa" />
+								<h:outputText value="#{gestorBean.calculaTotalCaixa()}">
+									<f:convertNumber type="currency" currencySymbol=""
+										locale="pt_BR" />
+								</h:outputText>
+
+								<h:outputLabel value="Compromissada" rendered="false" />
+								<h:outputLabel value="" rendered="false" />
+
+								<h:outputLabel value="Saldo" />
+								<h:outputText value="#{gestorBean.fundoSaldo.pl}">
+									<f:convertNumber type="currency" currencySymbol=""
+										locale="pt_BR" />
+								</h:outputText>
+
+								<h:outputLabel value="Caixa Liquidação" rendered="false" />
+								<h:outputLabel value="" rendered="false" />
+
+								<h:outputLabel value="Aplicação" />
+								<h:outputText value="#{gestorBean.fundoSaldo.aplicacao}">
+									<f:convertNumber type="currency" currencySymbol=""
+										locale="pt_BR" />
+								</h:outputText>
+
+								<h:outputLabel value="Resgate" />
+								<h:outputText value="#{gestorBean.fundoSaldo.resgate}">
+									<f:convertNumber type="currency" currencySymbol=""
+										locale="pt_BR" />
+								</h:outputText>
+
+								<h:outputLabel value="Bol. Liq D0" />
+								<h:outputText value="#{gestorBean.valorLiquidacaoFundo}">
+									<f:convertNumber type="currency" currencySymbol=""
+										locale="pt_BR" />
+								</h:outputText>
+							</h:panelGrid>
+						</p:panel>
+
+						<p:panel header="Informações do Ativo">
+							<h:panelGrid columns="2" id="informacoesAtivo"
+								columnClasses="colEsquerda, colDireita"
+								rowClasses="rowPanelGrid1, rowPanelGrid2">
+								<h:outputLabel value="Qtd. Disp." />
+								<h:outputText
+									value="#{gestorBean.ativoSPCSelecionado.quantidade}">
+									<f:convertNumber type="currency" currencySymbol="" locale="pt" />
+								</h:outputText>
+
+								<h:outputLabel value="Valor Disp." />
+								<h:outputText
+									value="#{gestorBean.ativoSPCSelecionado.valorMercado()}">
+									<f:convertNumber type="currency" currencySymbol=""
+										locale="pt_BR" />
+								</h:outputText>
+
+							</h:panelGrid>
+						</p:panel>
+						<p:panel header="Informações do Fundo">
+							<h:panelGrid columns="2" id="informacoesEuroclear">
+								<h:outputLabel value="CNPJ" />
+								<h:outputLabel value="#{gestorBean.fundoSelecionado.cgc}"
+									converter="cnpjConverter" />
+
+								<h:outputLabel value="Euroclear" />
+								<p:outputLabel
+									value="#{gestorBean.fundoSelecionado.euroclear.euroclear}"
+									id="euroclear" />
+
+								<h:outputLabel value="BBSEC" />
+								<p:outputLabel
+									value="#{gestorBean.fundoSelecionado.euroclear.bbsec}"
+									id="bbsec" />
+							</h:panelGrid>
+						</p:panel>
+						<p:panel header="Informações do Emissor">
+							<h:panelGrid columns="2" id="informacoesEmissor">
+								<h:outputLabel value="Emissor" />
+								<h:outputLabel value="#{gestorBean.disponivelEmissor.isinGrupo}"
+									converter="cnpjConverter" />
+
+								<h:outputLabel value="Status Limite" />
+								<p:outputLabel
+									value="#{gestorBean.disponivelEmissor.statusLimite}"
+									id="status" />
+
+								<h:outputLabel value="Limite (milhares)" />
+								<p:outputLabel value="#{gestorBean.limiteExibicao}" id="limite">
+									<f:convertNumber type="currency" currencySymbol="R$"
+										minFractionDigits="0" maxFractionDigits="0" locale="pt_BR" />
+								</p:outputLabel>
+								<h:outputLabel value="Disponível (milhares)" />
+								<p:outputLabel value="#{gestorBean.disponivelExibicao}"
+									id="disponivel">
+									<f:convertNumber type="currency" currencySymbol="R$"
+										minFractionDigits="0" maxFractionDigits="0" locale="pt_BR" />
+								</p:outputLabel>
+							</h:panelGrid>
+						</p:panel>
+
+					</h:panelGrid>
+
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:growl id="growl" />
+
+			<p:panel id="painelLojas">
+
+				<p:dataTable value="#{consultaLojaBean.lojas}" var="lj"
+					paginator="true" rows="10" reflow="true" id="lojasTable"
+					widgetVar="wvLojasTable">
+					<f:facet name="header">
+           	 		Lojas
+           	 		<p:commandButton value="Cadastrar nova loja"
+							action="/cadastraLojas?faces-redirect=true" />
+							
+					</f:facet>
+					<p:column headerText="Nome" width="5%">
+
+						<h:outputText value="#{lj.nome}" style="center" />
+
+					</p:column>
+
+					<p:column headerText="CNPJ" width="5%">
+
+						<h:outputText value="#{lj.cnpj}" style="center" />
+
+					</p:column>
+
+					<p:column headerText="E-mail" width="5%">
+
+						<h:outputText value="#{lj.email}" style="center" />
+
+					</p:column>
+
+					<p:column headerText="Status" width="5%"
+						filterBy="#{lj.status.descricao}">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('wvLojasTable').filter()"
+								converter="oneMenuConverter">
+								<f:selectItem itemLabel="Selecione status da loja"
+									itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{consultaLojaBean.listaStatus}"
+									var="status" itemLabel="#{status.descricao}"
+									itemValue="#{status.descricao}" />
+							</p:selectOneMenu>
+						</f:facet>
+						<div class="tableElement">
+							<h:outputText value="#{lj.status.descricao}" style="center" />
+						</div>
+					</p:column>
+					<p:column headerText="Consultar" width="1.7%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-search"
+								action="#{consultaLojaBean.actionButton(f)}"
+								style="horizontal-align:center" />
+
+						</div>
+					</p:column>
+					<p:column headerText="Editar" width="1.3%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-pencil" action="/editaLojas.xhtml"
+								styleClass="botoesIcones" style="center">
+								<f:param name="LojaId" value="#{lj.id}" />
+							</p:commandButton>
+						</div>
+					</p:column>
+					<p:column headerText="Excluir" width="1.3%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-trash"
+								action="#{consultaLojaBean.excluirLoja()}"
+								styleClass="botoesIcones" style="center">
+								<f:param name="LojaId" value="#{lj.id}" />
+							</p:commandButton>
+						</div>
+					</p:column>
+
+
+
+				</p:dataTable>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

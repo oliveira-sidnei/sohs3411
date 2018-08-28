@@ -1,0 +1,182 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:growl id="growl" />
+			<p:panel id="painelCadastraFuncionarios"
+				header="Cadastro de Funcionarios">
+
+				<p:commandButton value="Resetar senha"
+					action="#{editaFuncionarioBean.resetaSenha}">
+					<p:confirm header="Confirmação"
+						message="Tem certeza que deseja resetar a senha?"
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						icon="ui-icon-cancel">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+				<p:panel header="Dados pessoais" styleClass="semBorda">
+					<p:panelGrid columns="2">
+
+						<p:outputLabel
+							value="Perfil que o funcionário terá como usuário do sistema" />
+						<p:selectOneMenu id="comboPerfis"
+							value="#{editaFuncionarioBean.funcionarioSelecionado.usuario.perfil}"
+							converter="oneMenuConverter">
+
+							<f:selectItem
+								itemLabel="#{editaFuncionarioBean.funcionarioSelecionado.usuario.perfil.descricao}"
+								itemValue="#{editaFuncionarioBean.funcionarioSelecionado.usuario.perfil}" />
+							<f:selectItems value="#{editaFuncionarioBean.listaPerfis}"
+								var="perfil" itemLabel="#{perfil.descricao}"
+								itemValue="#{perfil}" />
+
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Matrícula" />
+						<p:inputText
+							value="#{editaFuncionarioBean.funcionarioSelecionado.matricula}"
+							disabled="true" />
+						<p:outputLabel value="CPF" />
+						<p:inputMask
+							value="#{editaFuncionarioBean.funcionarioSelecionado.cpf}"
+							required="true" requiredMessage="Campo Obrigatório: CPF"
+							mask="999.999.999-99" />
+						<p:outputLabel value="Nome" />
+						<p:inputText
+							value="#{editaFuncionarioBean.funcionarioSelecionado.nome}" 
+							required="true" requiredMessage="Campo Obrigatório: Nome"/>
+
+						<p:outputLabel value="Data de Nascimento" />
+						<p:calendar
+							value="#{editaFuncionarioBean.funcionarioSelecionado.dataNascimento}"
+							showOn="button" pattern="dd/MM/yyyy"
+							mindate="#{editaFuncionarioBean.dataMinima}"
+							maxdate="#{editaFuncionarioBean.dataMaxima}" />
+
+						<p:outputLabel value="Status" />
+						<p:selectOneMenu id="comboStatus"
+							value="#{editaFuncionarioBean.funcionarioSelecionado.status}"
+							converter="oneMenuConverter">
+
+							<f:selectItems value="#{editaFuncionarioBean.listaStatus}"
+								var="status" itemLabel="#{status.descricao}" />
+
+						</p:selectOneMenu>
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:panel header="Dados para contato" styleClass="semBorda">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="E-mail" />
+						<p:inputText
+							value="#{editaFuncionarioBean.funcionarioSelecionado.email}" 
+							required="true" requiredMessage="Campo Obrigatório: E-mail"/>
+						<p:outputLabel value="Telefone" />
+						<p:inputMask
+							value="#{editaFuncionarioBean.funcionarioSelecionado.telefone}"
+							mask="(99)9999-9999" />
+						<p:outputLabel value="Celular" />
+						<p:inputMask
+							value="#{editaFuncionarioBean.funcionarioSelecionado.celular}"
+							mask="(99)99999-9999" />
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:panel id="painelCadastraLoja" header="Dados Locacionais">
+					<p:panelGrid columns="6" styleClass="semBorda">
+
+						<p:outputLabel value="CEP" />
+						<p:inputMask mask="99999-999"
+							value="#{editaFuncionarioBean.funcionarioSelecionado.cep}"
+							required="true" requiredMessage="Campo Obrigatório: CEP">
+
+							<p:ajax listener="#{editaFuncionarioBean.buscaCep()}"
+								event="blur" update="ruaFunc bairroFunc estadoFunc cidadeFunc" />
+
+						</p:inputMask>
+						<p:outputLabel value="Logradouro" />
+						<p:inputText id="ruaFunc"
+							value="#{editaFuncionarioBean.funcionarioSelecionado.rua}"
+							disabled="true" />
+						<p:outputLabel value="Numero" />
+						<p:inputText
+							value="#{editaFuncionarioBean.funcionarioSelecionado.numero}" />
+
+
+						<p:outputLabel value="Bairro" />
+						<p:inputText id="bairroFunc"
+							value="#{editaFuncionarioBean.funcionarioSelecionado.bairro}"
+							disabled="true" />
+						<p:outputLabel value="Estado" />
+						<p:inputText id="estadoFunc"
+							value="#{editaFuncionarioBean.funcionarioSelecionado.estado}"
+							disabled="true" />
+						<p:outputLabel value="Cidade" />
+						<p:inputText id="cidadeFunc"
+							value="#{editaFuncionarioBean.funcionarioSelecionado.cidade}"
+							disabled="true" />
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:commandButton value="Salvar"
+					action="#{editaFuncionarioBean.salva}" update="growl">
+					<p:confirm header="Confirmação"
+						message="Tem certeza que deseja salvar o registro?"
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+
+				<p:commandButton value="Cancelar"
+					action="#{editaFuncionarioBean.cancela}">
+					<p:confirm header="Confirmação"
+						message="Tem certeza que deseja cancelar o cadastro? Todos os dados digitados serão perdidos."
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						icon="ui-icon-cancel">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+			</p:panel>
+
+			<p:panelGrid columns="2" styleClass="semBorda">
+
+			</p:panelGrid>
+		</h:form>
+		<div id="rodape">
+			<div id="rodapeLogoBB">
+				<div id="rodapeTextoBloco">
+					<div id="rodapeTextoAlinhamento">
+						<b><span> Info Sistemas <br /> Divisão de Tecnologia
+								da Informação
+						</span></b><br /> Email: insti@email.com.br
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

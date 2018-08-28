@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+		<p:growl id = "growl"/>
+			<p:panel header="Lojistas">
+				<p:dataTable value="#{consultaLojistaBean.listaLojistas}"
+					var="lojista" paginator="true" rows="10" reflow="true"
+					id="lojistasTable">
+					<f:facet name="header">
+           	 		Lojistas
+           	 		<p:commandButton value="Cadastrar novo lojista"
+							action="#{consultaLojistaBean.cadastraLojista}" />
+					</f:facet>
+					<p:column headerText="Nome" width="5%">
+						<div class="tableElement">
+							<h:outputText value="#{lojista.nome}" style="center" />
+						</div>
+					</p:column>
+					<p:column headerText="CPF" width="5%">
+						<div class="tableElement">
+							<h:outputText value="#{lojista.cpf}" style="center" />
+						</div>
+					</p:column>
+					<p:column headerText="Email" width="5%">
+						<div class="tableElement">
+							<h:outputText value="#{lojista.email}" style="center" />
+						</div>
+					</p:column>
+					<p:column headerText="Telefone" width="5%">
+						<div class="tableElement">
+							<h:outputText value="#{lojista.telefone}" style="center" />
+						</div>
+					</p:column>
+					<p:column headerText="Consultar" width="1.5%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-search"
+								action="#{consultaLojistaBean.actionButton(f)}"
+								style="horizontal-align:center" />
+
+						</div>
+					</p:column>
+					<p:column headerText="Editar" width="1.2%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-pencil"
+								action="/editaLojistas.xhtml" styleClass="botoesIcones"
+								style="center">
+								<f:param name="LojistaId" value="#{lojista.id}" />
+							</p:commandButton>
+						</div>
+					</p:column>
+					<p:column headerText="Excluir" width="1.2%" style="center">
+						<div class="tableElement">
+							<p:commandButton icon="ui-icon-trash"
+								action="#{consultaLojistaBean.excluirLojista()}"
+								styleClass="botoesIcones" style="center">
+								<f:param name="LojistaId" value="#{lojista.id}" />
+								</p:commandButton>
+						</div>
+					</p:column>
+
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

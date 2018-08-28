@@ -1,0 +1,158 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:growl id="growl" />
+			<p:panel id="painelCadastraLoja" header="Cadastro de lojas">
+
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Nome" />
+					<p:inputText value="#{cadastraLojaBean.lojaSelecionada.nome}"
+						required="true" requiredMessage="Campo Obrigatório: Nome" />
+					<p:outputLabel value="CNPJ" />
+					<p:inputMask value="#{cadastraLojaBean.lojaSelecionada.cnpj}"
+						required="true" requiredMessage="Campo Obrigatório: CNPJ"
+						mask="99.999.999/9999-99" />
+					<p:outputLabel value="Número" />
+					<p:inputText value="#{cadastraLojaBean.lojaSelecionada.numero}" />
+					<p:outputLabel value="Telefone" />
+					<p:inputMask value="#{cadastraLojaBean.lojaSelecionada.telefone}"
+						mask="(99)9999-9999" />
+					<p:outputLabel value="E-mail" />
+					<p:inputText value="#{cadastraLojaBean.lojaSelecionada.email}" />
+
+					<p:outputLabel value="Data de Inicio" />
+					<p:calendar value="#{cadastraLojaBean.lojaSelecionada.dataInicio}"
+						required="true" requiredMessage="Campo Obrigatório: Data Inicio"
+						mask="true" pattern="dd/MM/yyyy"
+						mindate="#{cadastraLojaBean.dataMinima}" />
+					<p:outputLabel value="Data de Fim" />
+					<p:calendar value="#{cadastraLojaBean.lojaSelecionada.dataFim}"
+						required="true" requiredMessage="Campo Obrigatório: Data Fim"
+						mask="true" pattern="dd/MM/yyyy"
+						mindate="#{cadastraLojaBean.dataMinima}" />
+
+
+
+				</p:panelGrid>
+				<p:panel header="Tipos de evento" toggleable="true"
+					style="width:30%;">
+
+					<p:panelGrid columns="2" styleclass="semBorda">
+
+						<p:selectOneMenu converter="oneMenuConverter"
+							value="#{cadastraLojaBean.tipoEventoSelecionado}"
+							id="comboTipoEvento">
+
+							<f:selectItem itemValue="" itemLabel="Selecione o tipo de evento" />
+							<f:selectItems value="#{cadastraLojaBean.listaTipoEvento}"
+								var="tipoEvento" itemLabel="#{tipoEvento.descricao}"
+								itemValue="#{tipoEvento}" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Adicionar"
+							update="comboTipoEvento tableTipoEvento :form:growl"
+							action="#{cadastraLojaBean.adicionarTipoEvento}" />
+
+					</p:panelGrid>
+					<p:dataTable id="tableTipoEvento"
+						value="#{cadastraLojaBean.listaTipoEventoSelecionado}"
+						style="width:50%;" var="tipoEvento">
+						<p:column>
+							<p:panelGrid columns="2" styleClass="semBorda">
+								<p:outputLabel value="#{tipoEvento.descricao}" />
+								<p:commandButton
+									action="#{cadastraLojaBean.excluiTipoEvento(tipoEvento)}"
+									icon="ui-icon-trash" update="tableTipoEvento" />
+							</p:panelGrid>
+						</p:column>
+
+					</p:dataTable>
+				</p:panel>
+
+			</p:panel>
+			<p:panel id="painelCadastraLojista" header="Adicionar Lojista">
+
+				<p:selectOneMenu id="comboLojistas"
+					value="#{cadastraLojaBean.lojaSelecionada.lojista}"
+					converter="oneMenuConverter">
+
+					<p:ajax event="change" update="lojaInfo" />
+
+					<f:selectItem itemLabel="Selecione o lojista" itemValue="" />
+					<f:selectItems value="#{cadastraLojaBean.lojistas}" var="lojista"
+						itemLabel="#{lojista.cpf} | #{lojista.nome}"
+						itemValue="#{lojista}" />
+
+				</p:selectOneMenu>
+				<br />
+				<p:panel id="lojaInfo">
+
+					<p:panelGrid columns="10">
+
+						<p:outputLabel value="Nome" />
+						<p:outputLabel
+							value="#{cadastraLojaBean.lojaSelecionada.lojista.nome}"
+							styleClass="label" />
+
+						<p:outputLabel value="CPF" />
+						<p:outputLabel
+							value="#{cadastraLojaBean.lojaSelecionada.lojista.cpf}"
+							styleClass="label" />
+
+						<p:outputLabel value="E-mail" />
+						<p:outputLabel
+							value="#{cadastraLojaBean.lojaSelecionada.lojista.email}"
+							styleClass="label" />
+
+						<p:outputLabel value="Telefone" />
+						<p:outputLabel
+							value="#{cadastraLojaBean.lojaSelecionada.lojista.telefone}"
+							styleClass="label" />
+
+
+					</p:panelGrid>
+
+					<br />
+
+				</p:panel>
+				<br />
+
+				<br />
+				<p:growl id="message" showDetail="true" />
+
+
+			</p:panel>
+			<p:panelGrid columns="2" styleClass="semBorda">
+				<p:commandButton value="Salvar" update="growl"
+					action="#{cadastraLojaBean.salva}" />
+
+				<p:commandButton value="Cancelar"
+					action="#{cadastraLojaBean.cancela}">
+					<p:confirm header="Confirmação"
+						message="Tem certeza que deseja cancelar o cadastro? Todos os dados digitados serão perdidos."
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						icon="ui-icon-cancel">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+			</p:panelGrid>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

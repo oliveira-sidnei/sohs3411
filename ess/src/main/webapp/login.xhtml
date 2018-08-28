@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title>Easy Shop System</title>
+	<h:outputStylesheet library="css" name="login.css" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{request.contextPath}/resources/imagens/favicon.ico" />
+
+</h:head>
+
+<h:body>
+	<h:form prependId="false">
+		<p:growl id="growl" />
+		<br />
+
+		<br />
+		<p:panelGrid columns="1" styleClass="ui-fluid center ui-noborder">
+
+			<h3>BEM VINDO AO ESS</h3>
+			<p:graphicImage library="imagens" name="logo_branca.png" />
+
+
+			<p:outputLabel value="Matrícula" />
+			<p:inputText id="username" value="#{login.user.nameUser}" />
+			<p:message for="username" />
+
+			<p:outputLabel value="Senha:" />
+			<p:password id="password" value="#{login.user.password}" />
+			<div class="tableElement">
+				<p:commandButton action="#{login.validateUsernamePassword}"
+					value="Login" update="growl" />
+			</div>
+
+		</p:panelGrid>
+
+	</h:form>
+</h:body>
+</html>

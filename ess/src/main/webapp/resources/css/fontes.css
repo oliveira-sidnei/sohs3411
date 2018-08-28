@@ -1,0 +1,729 @@
+@charset "utf-8";
+/* CSS Document */
+
+.fontRowTable {
+   font-size: 8pt;
+}
+.fonteAlerta{
+	color:red;
+	 font-size: 14pt;
+	 font-weight: bold;
+}
+
+.menu-template{
+	font-family: Arial;
+	font-size: 10pt;	
+	color: rgba(255, 255, 255, 0.8);
+}
+.menu-template:hover{
+	font-size: 10pt;
+	color: FFF;	
+}
+
+/* Fontes Arial Preto */
+.Arial10Preto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #444;
+}
+
+.Arial10PretoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #444;
+	font-weight: bold;
+}
+
+.Arial11Preto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #444;
+}
+
+.Arial11PretoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #444;
+	font-weight: bold;
+}
+
+.Arial12Preto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #444;	
+}
+
+.Arial13Preto {
+	font-size: 13pt;
+	color: #444;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.Arial14Preto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #444;
+}
+
+.Arial16Preto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #444;
+}
+
+.Arial18Preto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #444;
+}
+
+.Arial20Preto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #444;
+}
+
+.Arial10PretoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #444;
+	font-weight: bold;
+}
+
+.Arial12PretoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #444;
+	font-weight: bold;
+}
+
+.Arial13PretoBold {
+	font-size: 13pt;
+	color: #444;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+.Arial14PretoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #444;
+	font-weight: bold;
+}
+
+.Arial16PretoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #444;
+	font-weight: bold;
+}
+
+.Arial18PretoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #444;
+	font-weight: bold;
+}
+
+.Arial20PretoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #444;
+	font-weight: bold;
+}
+/* Fim Fontes */
+
+/* Fontes Arial Azul */
+.Arial10Azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #178CD1;
+}
+
+.Arial10AzulBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #178CD1;
+	font-weight: bold;
+}
+
+.Arial11Azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #178CD1;
+}
+
+.Arial11AzulBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #178CD1;
+	font-weight: bold;
+}
+
+.Arial12Azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #178CD1;
+}
+
+.Arial12AzulBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #178CD1;
+	font-weight: bold;
+}
+
+.Arial13AzulBold {
+	font-size: 13pt;
+	color: #178CD1;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+.Arial14Azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #178CD1;
+}
+
+.Arial14AzulBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #178CD1;
+	font-weight: bold;
+}
+
+.Arial16Azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #178CD1;
+}
+
+.Arial18Azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #178CD1;
+}
+
+.Arial20Azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #178CD1;
+}
+
+.Arial16AzulBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #178CD1;
+	font-weight: bold;
+}
+
+.Arial18AzulBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #178CD1;
+	font-weight: bold;
+}
+
+.Arial20AzulBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #178CD1;
+	font-weight: bold;
+}
+/* Fim Fontes */
+
+/* Fontes Arial Azul Escuro */
+.Arial10AzulEscuro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #00309B;
+}
+
+.Arial10AzulEscuroBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #00309B;
+	font-weight: bold;
+}
+
+.Arial11AzulEscuro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #00309B;
+}
+
+.Arial11AzulEscuroBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #00309B;
+	font-weight: bold;
+}
+
+.Arial12AzulEscuro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #00309B;
+}
+
+.Arial12AzulEscuroBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #00309B;
+	font-weight: bold;
+}
+
+.Arial13AzulEscuroBold {
+	font-size: 13pt;
+	color: #00309B;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+.Arial14AzulEscuro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #00309B;
+}
+
+.Arial14AzulEscuroBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #00309B;
+	font-weight: bold;
+}
+
+.Arial16AzulEscuro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #00309B;
+}
+
+.Arial16AzulEscuroBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #00309B;
+	font-weight: bold;
+}
+
+.Arial18AzulEscuro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #00309B;
+}
+
+.Arial18AzulEscuroBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #00309B;
+	font-weight: bold;
+}
+
+.Arial20AzulEscuro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #00309B;
+}
+
+.Arial20AzulEscuroBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #00309B;
+	font-weight: bold;
+}
+/* Fim Fontes */
+
+
+.Arial10CinzaItalico {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: graytext;
+	font:italic;
+}
+/* Fontes Arial Vermelho */
+.Arial10Verm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #CC0000;
+}
+
+.Arial10VermBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #CC0000;
+	font-weight: bold;
+}
+
+.Arial11Verm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #CC0000;
+}
+
+.Arial11Verm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #CC0000;
+}
+
+.Arial12Verm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #CC0000;
+}
+
+.Arial14Verm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #CC0000;
+}
+
+.Arial16Verm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #CC0000;
+}
+
+.Arial18Verm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #CC0000;
+}
+
+.Arial20Verm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #CC0000;
+}
+
+.Arial10VermBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #CC0000;
+	font-weight: bold;
+}
+
+.Arial12VermBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #CC0000;
+	font-weight: bold;
+}
+
+.Arial14VermBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #CC0000;
+	font-weight: bold;
+}
+
+.Arial16VermBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #CC0000;
+	font-weight: bold;
+}
+
+.Arial18VermBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #CC0000;
+	font-weight: bold;
+}
+
+.Arial20VermBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #CC0000;
+	font-weight: bold;
+}
+
+/* Fontes Branca */
+.Arial10Branco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #FFFFFF;
+}
+.Arial11Branco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #FFFFFF;
+}
+.Arial12Branco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #FFFFFF;
+}
+.Arial13Branco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13pt;
+	color: #FFFFFF;
+}
+.Arial14Branco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #FFFFFF;
+}
+.Arial10BrancoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.Arial12BrancoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.Arial13BrancoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.Arial14BrancoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.Arial16BrancoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.Arial18BrancoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.Arial20BrancoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.Arial22RoxoBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 22pt;
+	color: #660099;
+	font-weight: bold;
+}
+
+/* Fontes Arial Verde */
+.Arial10VerdeBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #69986E;
+	font-weight: bold;
+}
+
+.Arial11VerdeBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #009900;
+	font-weight: bold;
+}
+
+.Arial12VerdeBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #69986E;
+	font-weight: bold;
+}
+
+.Arial13VerdeBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13pt;
+	color: #69986E;
+	font-weight: bold;
+}
+
+.Arial14VerdeBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #69986E;
+	font-weight: bold;
+}
+
+.Arial16VerdeBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #69986E;
+	font-weight: bold;
+}
+
+.Arial18VerdeBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #69986E;
+	font-weight: bold;
+}
+
+/*Abobora*/
+.Arial10LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+.Arial11LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+.Arial12LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+.Arial13LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+.Arial14LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+.Arial16LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+.Arial18LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+.Arial20LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+.Arial22LaranjaBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 22pt;
+	color: #E77915;
+	font-weight: bold;
+}
+
+/*amarelo*/
+
+/*Abobora*/
+.Arial10AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Arial11AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Arial12AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Arial13AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Arial14AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Arial16AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Arial18AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Arial20AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Arial22AmareloBold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 22pt;
+	color: #FFFF00;
+	font-weight: bold;
+}
+
+.Calibri11PretoBold {
+	font-family: Calibri;
+	font-size: 13pt;
+	color: #222;
+	font-weight: bold;
+}
+#dataAtualConsulta{
+	color:red;
+}
+/*	
+@font-face {
+	font-family: "RegencyScriptFLF Regular";
+	src: url("http://site/fontes/RegencyScriptFLF-Regular.eot"); 
+	src: url("http://site/fontes/RegencyScriptFLF-Regular.ttf");
+	}
+
+@font-face {	
+	font-family: "RegencyScriptFLF Regular";
+	src: url("http://site/fontes/RegencyScriptFLF-Regular.eot"); 
+	src: url("http://site/fontes/RegencyScriptFLF-Regular.ttf");
+	}
+*/
+/*.Segoe {
+	font-family:"Segoe Script", Calibri, Arial, sans-serif;
+	font-size:16px;
+	}
+*/

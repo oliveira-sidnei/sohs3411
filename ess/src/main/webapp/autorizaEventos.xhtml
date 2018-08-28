@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:ajaxStatus onstart="PF('statusDialog').show()"
+				onsuccess="PF('statusDialog').hide()" />
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage library="imagens" name="ajax-loader.gif" />
+				<br></br>
+				<h:outputLabel>
+					<b>Processando...</b>
+				</h:outputLabel>
+			</p:dialog>
+			<p:growl id="growl" />
+			<p:commandButton value="Envia Feed de eventos"
+				action="#{autorizaEvento.feedClientes}" />
+			<p:dataGrid var="e" value="#{autorizaEvento.listaEventosSolicitados}"
+				emptyMessage="Não há eventos à serem autorizados" layout="grid"
+				id="eventosAtivosTable" style="width:100%;margin:10px 0px">
+				<f:facet name="header">Eventos à autorizar</f:facet>
+				<p:panel id="panelEventosAtivos" header="#{e.nome}">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Nome" />
+						<h:outputText value="#{e.nome}" />
+						<p:outputLabel value="Local" />
+						<h:outputText value="#{e.local}" />
+						<p:outputLabel value="Valor" />
+						<h:outputText value="#{e.valorIngresso}">
+							<f:convertNumber type="currency" currencySymbol="R$"
+								locale="pt_BR" />
+						</h:outputText>
+						<p:outputLabel value="Status" />
+						<p:outputLabel value="#{e.status.descricao}" />
+						<p:outputLabel value="Horário" />
+						<p:outputLabel value="#{e.horario}">
+							<f:convertDateTime pattern="HH:mm" />
+						</p:outputLabel>
+						<p:outputLabel value="Data de Inicio" />
+						<p:outputLabel
+							value="#{geraBoletoBean.retornaDataString(e.dataInicio)}" />
+						<p:outputLabel value="Data de fim" />
+						<p:outputLabel
+							value="#{geraBoletoBean.retornaDataString(e.dataFim)}" />
+
+						<p:outputLabel value="Descrição" />
+
+						<p:outputLabel value="#{e.descricao}" style="width:30%" />
+
+					</p:panelGrid>
+					<p:panelGrid columns="2" styleClass="semBorda">
+						<p:commandButton value="Autorizar"
+							action="#{autorizaEvento.autorizaEventos(e)}"
+							update="eventosAtivosTable :form:growl" />
+						<p:commandButton value="Não autorizar"
+							action="#{autorizaEvento.recusaEventos(e)}"
+							update="eventosAtivosTable :form:growl" />
+
+					</p:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

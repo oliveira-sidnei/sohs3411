@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+
+
+	<named-native-query name="tipoEventoMaisProcurado"
+		result-class="br.com.ins.core.TipoEvento">
+		<query>
+		<![CDATA[
+			select count(etp.idTipoEvento) as ocorrencia, 
+			tp.id as id,
+			tp.descricao as descricao 
+			from ess_evento e 
+			inner join ess_evento_tipoEvento etp on e.id = etp.idEvento 
+			inner join ess_tipoevento tp on etp.idTipoEvento = tp.id
+			where e.dataInicio between :dataInicio and :dataFim
+			group by tp.descricao
+		]]>
+		</query>
+	</named-native-query>
+
+	<named-native-query name="lojistasPorEvento"
+		result-class="br.com.ins.core.Lojista">
+		<query>
+		<![CDATA[
+		select  l.id as id,
+		l.nome as nome,
+		l.cpf as cpf,
+		l.email as email,
+		l.telefone as telefone,
+		l.matricula as matricula,
+		l.celular as celular,
+		l.idUsuario
+		from ess_evento_loja el 
+		inner join ess_loja lj on el.IDLOJA = lj.id 
+		inner join ess_lojista l on lj.idLojista = l.id
+		group by l.email		
+		]]>
+		</query>
+	</named-native-query>
+	<named-native-query name="lojasComAtraso"
+		result-class="br.com.ins.core.Loja">
+		<query>
+		<![CDATA[
+		select lj.id as id, 
+		lj.nome as nome,
+		lj.cnpj as cnpj,
+		lj.telefone as telefone,
+		lj.email as email,
+		lj.idLojista,
+		lj.dataInicio as dataInicio,
+		lj.dataFim as dataFim,
+		lj.numero as numero,
+		lj.idStatus 
+		from
+		ess_loja lj 
+		inner join ess_aluguel al 
+		on lj.id = al.idLoja 
+		where al.idStatus = 55		
+		]]>
+		</query>
+	</named-native-query>
+	
+		<named-native-query name="eventosPorCliente"
+		result-class="br.com.ins.core.Evento">
+		<query>
+		<![CDATA[
+		select distinct e.* from ess_evento e 
+		inner join ess_evento_tipoevento 
+		etp on e.id = etp.idEvento 
+		inner join ess_cliente_tipoevento 
+		ctp on etp.idTipoEvento = ctp.idTipoEvento	
+		where ctp.idCliente = :idCliente
+		and e.idStatus = 10
+		]]>
+		</query>
+	</named-native-query>
+		<named-native-query name="eventosPorLojaValor"
+		result-class="br.com.ins.core.Evento">
+		<query>
+		<![CDATA[
+		select distinct e.* 
+		from ess_evento e 
+		inner join ess_evento_loja el 
+		on e.id = el.IDEVENTO 
+		where el.IDLOJA = :idLoja
+		]]>
+		</query>
+	</named-native-query>
+	
+
+</entity-mappings>

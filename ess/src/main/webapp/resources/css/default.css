@@ -1,0 +1,525 @@
+.ui-datatable tr.ui-datatable-even {
+	background: #eef3f7;
+}
+
+.ui-datatable tr.ui-datatable-even:hover, .ui-datatable tr.ui-datatable-odd:hover
+	{
+	background: #ffe6b4;
+}
+
+.ui-widget {
+	font-family: Arial, sans-serif !important;
+	font-size: 10pt !important;
+}
+
+.ui-picklist .ui-picklist-list {
+	width: 400px;
+}
+
+th {
+	font-size: 10pt !important;
+}
+
+/* Tabelas */
+.table {
+	width: 100%;
+	font-size: 10pt !important;
+}
+
+.tableRow {
+	width: 100%;
+	font-size: 10pt !important;
+}
+
+.tableButton {
+	width: 95%;
+	height: 25px;
+	font-size: 10pt !important;
+}
+
+/* tudo */
+#tudo {
+	position: relative; /*Contexto de posicionamento */
+	min-height: 100%;
+	margin: 0 auto;
+}
+
+* html #tudo {
+	height: 100%; /* hack para IE6 que trata height como min-height */
+}
+
+/* miolo */
+#conteudo, section {
+	padding-bottom: 110px;
+	width: 99.5%;
+	height: auto;
+	min-width: 600px;
+	margin: 0 auto;
+	background: rgba(255, 255, 255, 0.01);
+}
+
+/** rodape **/
+#rodape {
+	width: 100%;
+	border-top: #ccc solid 1px;
+	height: 100px;
+	background: url(../resources/imagens/rdpBarra.jpg) top left repeat-x;
+	bottom: 0;
+	left: 0;
+	position:fixed;
+}
+
+#rodapeLogoBB {
+	background: url(../resources/imagens/rdpLogo.jpg) top left no-repeat;
+	height: 100px;
+}
+
+#rodapeTextoBloco {
+	border-top: 2px solid #CCD9E6;
+	text-align: left;
+	float: left;
+	left: 10%;
+}
+
+#rodapeTextoAlinhamento {
+	font-size: 13px;
+	padding: 15px 0 20px 80px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0 auto;
+}
+
+#rodapeTextoAlinhamento span {
+	color: #3F8DC7;
+}
+
+.sombra {
+	-moz-border-radius: 0px;
+	-moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.27);
+	-webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.27);
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.27);
+}
+
+.mostraMao {
+	cursor: pointer;
+}
+
+.hoverRow1:hover {
+	background-color: #FFCC66;
+	color: #111;
+}
+
+body {
+	font-family: Arial sans-serif;
+	font-size: small;
+	margin: 0px;
+	padding: 0;
+	background-color: #F1F1F1;
+	position: relative;
+	height: 100%;
+}
+
+h1, h2, h3 {
+	margin-top: 0;
+}
+
+h1 {
+	font-size: 1.6em;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 1.6em;
+}
+
+h3 {
+	font-size: 1em;
+	margin-top: 20px;
+}
+
+ul {
+	
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a img {
+	border: none;
+}
+
+img.left {
+	float: left;
+	margin: 0 20px 0 0;
+}
+
+img.right {
+	float: right;
+	margin: 0 0 0 20px;
+}
+
+.janelaDetalhe {
+	font-family: sans-serif !important;
+	font-size: 10pt !important;
+}
+
+.circle_red {
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+	background-color: red;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+	position: static;
+	float: left;
+}
+
+.circle_grn {
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+	background-color: green;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+	position: static;
+	float: left;
+}
+
+/*    NOVO Layout    */
+#areaCabecalho {
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(10%, #40668c),
+		color-stop(100%, #003366));
+	background-image: -webkit-linear-gradient(#40668c 10%, #003366);
+	background-image: -moz-linear-gradient(#40668c 10%, #003366);
+	background-image: -o-linear-gradient(#40668c 10%, #003366);
+	background-image: linear-gradient(#40668c 10%, #003366);
+	height: 78px;
+	border-bottom: 3px solid #036;
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.04);
+	margin-bottom: 3px;
+}
+
+#areaCabecalhoNivel1 {
+	background: transparent;
+	height: 46px;
+	display: block;
+}
+
+#areaCabecalhoNivel2 {
+	background: transparent;
+	height: 32px;
+	display: block;
+	border-top: 1px solid #40668c;
+}
+
+#areaCabecalhoEsquerda {
+	position: absolute;
+	width: 50%;
+	height: 50px;
+	left: 5px;
+}
+
+#areaCabecalhoDireita {
+	position: absolute;
+	width: 50%;
+	height: 50px;
+	right: 5px;
+}
+
+#areaCabecalhoDireitaNv2 {
+	position: absolute;
+	width: 50%;
+	height: 32px;
+	right: 5px;
+}
+
+
+#tituloPagina {
+	position: relative;
+	top: 7px;
+	left: 46px;
+}
+
+#tituloPagina h1 {
+	font-family: Arial;
+	font-size: 13px;
+	font-weight: bold;
+	color: #fff;
+}
+
+#subtituloPagina {
+	position: relative;
+	top: 0px;
+	left: 47px;
+}
+
+#campoDescricaoEvento {
+	float: right;
+}
+
+#subtituloPagina h1 {
+	font-family: Arial;
+	font-size: 11px;
+	color: #e1e1e1;
+}
+
+.menuPrincipal {
+	
+}
+
+/**************** AreaNavCabecalho *****************/
+#areaNavCabecalho {
+	position: relative;
+	float: right;
+}
+
+#areaNavCabecalho>li {
+	position: relative;
+	float: left;
+	top: 5px;
+	width: 60px;
+	list-style-type: none;
+}
+
+#areaNavCabecalho>li>a {
+	display: inline-block;
+	text-decoration: none;
+	font-family: Arial;
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+#areaNavCabecalho>li>a:hover {
+	color: #FFF;
+}
+
+#areaNavCabecalho>li:last-child {
+	margin-right: 0
+}
+
+#areaNavCabecalho>li:last-child a {
+	margin-left: 1px;
+	padding-right: 0
+}
+
+#areaNavCabecalho>li.dropdown {
+	margin-right: 10px
+}
+
+#areaNavCabecalho>li.dropdown>ul {
+	border-color: #c5c5c5
+}
+
+#areaNavCabecalho>li.dropdown>ul>li:first-child {
+	border-top: 0
+}
+
+#areaNavCabecalho>li.dropdown>ul>li:first-child:before {
+	position: absolute;
+	top: -10px;
+	right: 25px;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-top: 1px;
+	border-bottom-color: #fff;
+	content: "";
+}
+
+/**************** AreaNavCabecalhoNv2 *****************/
+#areaNavCabecalhoNv2 {
+	position: relative;
+	float: right;
+}
+
+#areaNavCabecalhoNv2>li {
+	position: relative;
+	float: center;
+	top: -7px;
+	width: 60px;
+	list-style-type: none;
+}
+
+#areaNavCabecalhoNv2>li>a {
+	display: inline-block;
+	text-decoration: none;
+	font-family: Arial;
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+#areaNavCabecalhoNv2>li>a:hover {
+	color: #FFF;
+}
+
+#areaNavCabecalhoNv2>li:last-child {
+	margin-right: 0
+}
+
+#areaNavCabecalhoNv2>li:last-child a {
+	margin-left: 1px;
+	padding-right: 0
+}
+
+#areaNavCabecalhoNv2>li.dropdown {
+	margin-right: 10px
+}
+
+#areaNavCabecalhoNv2>li.dropdown>ul {
+	border-color: #c5c5c5
+}
+
+#areaNavCabecalhoNv2>li.dropdown>ul>li:first-child {
+	border-top: 0
+}
+
+#areaNavCabecalhoNv2>li.dropdown>ul>li:first-child:before {
+	position: absolute;
+	top: -10px;
+	right: 25px;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-top: 1px;
+	border-bottom-color: #fff;
+	content: "";
+}
+
+/************ Dropdown ******************/
+.dropdown:hover>ul {
+	position: absolute;
+	top: 25px;
+	z-index: 99998;
+	display: list-item;
+	list-style-type: none;
+	right: 5px;
+}
+
+.dropdown>ul {
+	display: none;
+	margin: 0;
+	padding: 0;
+	min-width: 200px;
+	border: 1px solid;
+	background-color: #fff;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+}
+
+.dropdown>ul li {
+	position: relative;
+	border-bottom: 1px solid #f1f1f1;
+	line-height: 1;
+}
+
+.dropdown>ul li a {
+	display: block;
+	padding: 10px 15px;
+	font-family: Arial;
+	color: #222;
+	text-decoration: none;
+	font-size: 11px;
+	line-height: 1;
+}
+
+.dropdown>ul li a:hover {
+	text-decoration: underline
+}
+
+.dropdown>ul li:first-child {
+	padding-top: 0
+}
+
+.dropdown>ul li:last-child {
+	border-bottom: 0
+}
+
+.dropdown>ul li.ativo a:before, .dropdown>ul li a.ativo:before {
+	border-color: #bbb;
+	background: #bbb
+}
+
+.icone-menu {
+	position: absolute;
+	right: 10px;
+}
+
+.icone-sair {
+	position: absolute;
+	right: 17px;
+}
+
+.icone-ambiente {
+	position: absolute;
+	right: 7px;
+}
+
+.ambiente {
+	margin-left: -25px
+}
+
+.ui-datalist-data {
+	border: 0px;
+}
+
+.semBorda tr, .semBorda td {
+	border: none !important;
+}
+
+.retiraBorda {
+	border: none !important;
+}
+
+.label {
+	display: block;
+	width: 150px;
+}
+
+.panelInvisivel {
+	border: 0px; ! important;
+	background: transparent !important;
+}
+
+.ui-datatable-tablewrapper {
+	overflow-x: auto;
+}
+
+.ui-panel, .ui-panel-content {
+	padding: 0.5em 50em;
+}
+
+.panelReduzido {
+	width: 10px;
+}
+
+#tipoEventoTable {
+	position: absolute;
+	right: 100px;
+	float: right;
+}
+
+.colEsquerda {
+	text-align: left;
+}
+
+.colDireita {
+	text-align: right;
+}
+
+.alignTop {
+	vertical-align: top;
+}
+
+.rowPanelGrid1 {
+	padding-right: 5px;
+}
+
+.rowPanelGrid2 {
+	background-color: #eef3f7;
+	padding-right: 5px;
+}
+
+.customTitleBar > .ui-panel-titlebar {
+    background: #ea3933;
+    }

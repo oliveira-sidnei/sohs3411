@@ -1,0 +1,140 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<f:metadata>
+	<f:event type="preRenderView"
+		listener="#{cadastraClienteBean.buscaCliente}" />
+</f:metadata>
+<!-- Age antes do pós-construct, antes de renderizar a view. -->
+
+<h:head>
+	<title>ESS - Easy Shop System</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="fontes.css" />
+	<h:outputStylesheet library="css" name="override.css" />
+
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{request.contextPath}/resources/imagens/favicon.ico" />
+
+</h:head>
+
+
+<h:body>
+	<div id="areaCabecalho">
+		<div id="areaCabecalhoNivel1">
+			<div id="areaCabecalhoEsquerda"></div>
+			<div id="tituloPagina">
+				<h1>ESS - Easy Shop System</h1>
+			</div>
+			<div id="subtituloPagina">
+				<h1>
+					Bem vindo #{login.user.nameUser}
+					<!-- #{segurancaBean.usuarioDTVM.nome.toUpperCase()} -->
+				</h1>
+			</div>
+		</div>
+		<div id="areaCabecalhoDireita"></div>
+		<div id="areaCabecalhoNivel2">
+			<div id="areaCabecalhoDireitaNv2">
+				<div style="float: right; margin-right: 20px; margin-top: 7px;">
+					<span class="menu-template"> <h:outputText
+							value="#{indexBean.dataExibicao}">
+							<f:convertDateTime pattern="EEEE, dd 'de' MMMMM 'de' yyyy"
+								locale="pt_BR" timeZone="Brazil/East" />
+						</h:outputText>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<h:form id="form">
+		<p:breadCrumb>
+			<p:menuitem value="Início" url="/index" />
+			<p:menuitem value="Início" url="/index" />
+
+		</p:breadCrumb>
+		<p:growl id="growl" />
+		<p:panel header="Faça seu cadastro">
+			<p:panel header="Dados pessoais">
+
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Seu nome" />
+					<p:inputText value="#{cadastraClienteBean.clienteSelecionado.nome}"
+						size="50" required="true" requiredMessage="Campo Obrigatório: Nome" />
+
+					<p:outputLabel value="Seu E-mail" />
+					<p:inputText
+						value="#{cadastraClienteBean.clienteSelecionado.email}"
+						required="true" requiredMessage="Campo Obrigatório: Email" size="35" />
+					<p:outputLabel value="Data de nascimento" />
+					<p:calendar
+						value="#{cadastraClienteBean.clienteSelecionado.dataNascimento}"
+						mask="true" showOn="button" pattern="dd/MM/yyyy" />
+
+
+					<p:outputLabel value="CPF" />
+					<p:inputMask mask="999.999.999-99"
+						value="#{cadastraClienteBean.clienteSelecionado.cpf}"
+						required="true" requiredMessage="Campo Obrigatório:CPF " />
+
+				</p:panelGrid>
+				<p:outputLabel for="radioGenero" value="Sexo:" />
+				<p:selectOneRadio id="radioGenero"
+					value="#{cadastraClienteBean.clienteSelecionado.sexo}">
+					<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+					<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+				</p:selectOneRadio>
+			</p:panel>
+
+			<p:panel header="Perfil do visitante">
+				<p:panelGrid columns="2" styleclass="semBorda">
+
+					<p:selectOneMenu converter="oneMenuConverter"
+						value="#{cadastraClienteBean.tipoEventoSelecionado}"
+						id="comboTipoEvento">
+
+						<f:selectItem itemValue="" itemLabel="Selecione o tipo de evento" />
+						<f:selectItems value="#{cadastraClienteBean.listaTiposEvento}"
+							var="tipoEvento" itemLabel="#{tipoEvento.descricao}"
+							itemValue="#{tipoEvento}" />
+					</p:selectOneMenu>
+
+					<p:commandButton value="Adicionar"
+						update="comboTipoEvento tableTipoEvento growl"
+						action="#{cadastraClienteBean.adicionarTipoEvento}" />
+
+				</p:panelGrid>
+				<p:dataTable id="tableTipoEvento"
+					value="#{cadastraClienteBean.listaTiposEventoSelecionado}"
+					style="width:30%;" var="tipoEvento">
+					<p:column>
+						<p:panelGrid columns="2" styleClass="semBorda">
+							<p:outputLabel value="#{tipoEvento.descricao}" />
+							<p:commandButton
+								action="#{cadastraClienteBean.excluiTipoEvento(tipoEvento)}"
+								icon="ui-icon-trash" update="tableTipoEvento" />
+						</p:panelGrid>
+					</p:column>
+
+				</p:dataTable>
+
+
+			</p:panel>
+			<br />
+			<p:commandButton value="Salvar" action="#{cadastraClienteBean.salva}" />
+		</p:panel>
+
+	</h:form>
+</h:body>
+
+
+</html>

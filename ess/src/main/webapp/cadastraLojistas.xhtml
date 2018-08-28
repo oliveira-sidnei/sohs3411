@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+
+			<p:growl id="growl" />
+			<p:panel id="painelCadastraFuncionarios"
+				header="Cadastro de Lojistas">
+				<p:panel header="Dados pessoais" styleClass="semBorda">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Nome" />
+						<p:inputText
+							value="#{cadastraLojistaBean.lojistaSelecionado.nome}" required="true" requiredMessage="Campo Obrigatório: Nome" size="50" />
+						<p:outputLabel value="CPF" />
+
+						<p:inputMask value="#{cadastraLojistaBean.lojistaSelecionado.cpf}"
+							mask="999.999.999-99" required="true" requiredMessage="Campo Obrigatório: CPF">
+							<p:ajax event="blur" listener="#{cadastraLojistaBean.validaCPF}"
+								update="growl campoMatricula" />
+						</p:inputMask>
+						<p:outputLabel value="Matrícula" />
+						<p:inputText
+							value="#{cadastraLojistaBean.lojistaSelecionado.matricula}"
+							id="campoMatricula" disabled="true" />
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:panel header="Dados para contato" styleClass="semBorda">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="E-mail" />
+						<p:inputText
+							value="#{cadastraLojistaBean.lojistaSelecionado.email}" 
+							required="true" requiredMessage="Campo Obrigatório: E-mail" size="35" />
+						<p:outputLabel value="Telefone" />
+						<p:inputMask
+							value="#{cadastraLojistaBean.lojistaSelecionado.telefone}"
+							mask="(99)9999-9999" />
+						<p:outputLabel value="Celular" />
+						<p:inputMask value="#{cadastraLojistaBean.lojistaSelecionado.celular}"
+							mask="(99)99999-9999" />
+
+					</p:panelGrid>
+				</p:panel>
+				<br />
+				<p:commandButton value="Salvar"
+					action="#{cadastraLojistaBean.salva}" update="growl" />
+
+				<p:commandButton value="Cancelar"
+					action="#{cadastraLojistaBean.cancela}">
+					<p:confirm header="Confirmação"
+						message="Tem certeza que deseja cancelar o cadastro? Todos os dados digitados serão perdidos."
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						icon="ui-icon-cancel">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+			</p:panel>
+
+			<p:panelGrid columns="2" styleClass="semBorda">
+
+			</p:panelGrid>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

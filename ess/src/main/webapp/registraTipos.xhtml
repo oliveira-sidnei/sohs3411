@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+		<p:growl id = "growl"/>
+			<p:panel header="Tipos registro" id = "panelTipoRegistro" styleClass="painelInvisivel">
+				<p:panel header="Atualizar Tipos de Evento" toggleable="true"  id = "panelTipoEvento">
+					<p:panelGrid columns="3" styleClass="semBorda">
+
+						<p:outputLabel value="Segmento do tipo de evento" />
+						<p:inputText value="#{registraTipoBean.tipoEventoSelecionado.descricao}" />
+						<p:commandButton value="Adicionar" update="panelTipoEvento :form:growl"
+							action="#{registraTipoBean.adicionaTipoEvento}" />
+
+					</p:panelGrid>
+
+					<br />
+					<p:dataTable value="#{registraTipoBean.listaTiposEvento}" var="te"
+						style="width:30%;" id="tipoEventoTable" paginator="true" rows = "5">
+						<f:facet name="header">
+         			Tipos de evento
+				</f:facet>
+
+						<p:column>
+							<p:outputLabel value="#{te.descricao}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Excluir"
+								action="#{registraTipoBean.excluiTipoEvento(te)}"
+								update="tipoEventoTable" />
+						</p:column>
+
+
+					</p:dataTable>
+				</p:panel>
+
+				<p:panel header="Atualizar Tipos de Despesa" toggleable="true"  id = "panelTipoDespesa">
+					<p:panelGrid columns="3" styleClass="semBorda">
+						<p:outputLabel value="Tipo da despesa"/>
+						<p:inputText value="#{registraTipoBean.tipoDespesaSelecionada.descricao}"/>
+						<p:commandButton value="Adicionar" update="panelTipoDespesa :form:growl"
+							action="#{registraTipoBean.adicionaDespesa}" />
+
+					</p:panelGrid>
+
+					<br />
+					<p:dataTable value="#{registraTipoBean.listaDespesas}" var="d"
+						style="width:30%;" id="tipoDespesaTable" paginator="true" rows = "10">
+						<f:facet name="header">
+         			Tipos de despesa
+				</f:facet>
+
+						<p:column>
+							<p:outputLabel value="#{d.descricao}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Excluir"
+								action="#{registraTipoBean.excluiDespesa(d)}"
+								update="tipoDespesaTable" />
+						</p:column>
+
+
+					</p:dataTable>
+				</p:panel>
+				<br />
+				<p:commandButton value="Salvar" update="panelTipoRegistro growl"
+					action="#{registraTipoBean.salvar}" />
+
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,262 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:growl id="growl" />
+			<p:panel header="#{editaEventoBean.eventoSelecionado.nome}"
+				id="panelEventos">
+
+
+
+				<p:panel header="Informações do evento" id="painelInformacaoEventos">
+					<h:panelGrid columns="4" width="100%"
+						columnClasses="alignTop, alignTop, alignTop">
+						<h:panelGrid columns="2">
+
+							<p:outputLabel value="Nome do evento" />
+							<p:inputText value="#{editaEventoBean.eventoSelecionado.nome}" 
+							required="true" requiredMessage="Campo Obrigatório: Nome"/>
+
+							<p:outputLabel value="Horário" styleClass="Arial10PretoBold" />
+							<p:calendar value="#{editaEventoBean.eventoSelecionado.horario}"
+								pattern="HH:mm" timeOnly="true" />
+
+
+							<p:outputLabel value="Data de Inicio"
+								styleClass="Arial10PretoBold" />
+							<p:calendar
+								value="#{editaEventoBean.eventoSelecionado.dataInicio}"
+								required="true" requiredMessage="Campo Obrigatório: Data Inicio"
+								pattern="dd/MM/yyyy" mask="true"
+								mindate="#{editaEventoBean.dataMinima}" />
+
+
+							<p:outputLabel value="Data de Fim" styleClass="Arial10PretoBold" />
+							<p:calendar id="dataFimCalendar"
+								value="#{editaEventoBean.eventoSelecionado.dataFim}"
+								required="true" requiredMessage="Campo Obrigatório: Data Fim"
+								pattern="dd/MM/yyyy" mask="true"
+								mindate="#{editaEventoBean.dataMinima}" />
+
+
+							<p:outputLabel value="Status" />
+							<p:selectOneMenu id="comboStatus"
+								value="#{editaEventoBean.eventoSelecionado.status}"
+								converter="oneMenuConverter">
+								<f:selectItem
+									itemValue="#{editaEventoBean.eventoSelecionado.status}"
+									itemLabel="#{editaEventoBean.eventoSelecionado.status.descricao}" />
+								<f:selectItems value="#{editaEventoBean.listaStatus}"
+									var="status" itemLabel="#{status.descricao}" />
+
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Local do evento" />
+							<p:inputText value="#{editaEventoBean.eventoSelecionado.local}" />
+
+							<p:outputLabel value="Registrado por:" />
+							<p:inputText
+								value="#{editaEventoBean.eventoSelecionado.funcionario.nome}"
+								disabled="true" />
+
+							<p:outputLabel value="Valor do evento" />
+							<pe:inputNumber
+								value="#{editaEventoBean.eventoSelecionado.valorIngresso}"
+								decimalSeparator="," thousandSeparator="." required="true"
+								requiredMessage="Campo Obrigatório: Valor do ingresso" />
+						</h:panelGrid>
+						<p:panelGrid columns="3" styleClass="semBorda">
+							<p:panelGrid columns="1">
+								<p:outputLabel value="Descrição do evento" />
+
+								<p:inputTextarea rows="5" cols="50" counter="display"
+									maxlength="250" counterTemplate="{0} caracteres."
+									autoResize="false"
+									value="#{editaEventoBean.eventoSelecionado.descricao}" />
+								<p:outputLabel id="display" />
+							</p:panelGrid>
+
+						</p:panelGrid>
+
+					</h:panelGrid>
+
+					<p:panel header="Tipos de evento" toggleable="true"
+						style="width:30%;">
+
+						<p:panelGrid columns="2" styleclass="semBorda">
+
+							<p:selectOneMenu converter="oneMenuConverter"
+								value="#{editaEventoBean.tipoEventoSelecionado}"
+								id="comboTipoEvento">
+
+								<f:selectItem itemValue=""
+									itemLabel="Selecione o tipo de evento" />
+								<f:selectItems value="#{editaEventoBean.listaTipoEvento}"
+									var="tipoEvento" itemLabel="#{tipoEvento.descricao}"
+									itemValue="#{tipoEvento}" />
+							</p:selectOneMenu>
+
+							<p:commandButton value="Adicionar"
+								update="comboTipoEvento tableTipoEvento growl"
+								action="#{editaEventoBean.adicionarTipoEvento}" />
+
+						</p:panelGrid>
+						<p:dataTable id="tableTipoEvento"
+							value="#{editaEventoBean.listaTipoEventoSelecionado}"
+							style="width:50%;" var="tipoEvento">
+							<p:column>
+								<p:panelGrid columns="2" styleClass="semBorda">
+									<p:outputLabel value="#{tipoEvento.descricao}" />
+									<p:commandButton
+										action="#{editaEventoBean.excluiTipoEvento(tipoEvento)}"
+										icon="ui-icon-trash" update="tableTipoEvento" />
+								</p:panelGrid>
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+				</p:panel>
+				<p:panel id="painelFuncionarioSelecionado"
+					header="Funcionário responsável">
+
+					<p:selectOneMenu id="comboFuncionarios"
+						value="#{editaEventoBean.funcionarioSelecionado}"
+						converter="oneMenuConverter">
+
+						<p:ajax event="change"
+							listener="#{editaEventoBean.setaFuncionario}"
+							update="funcionarioInfo" />
+
+						<f:selectItem itemLabel="Selecione o funcionário" itemValue="" />
+						<f:selectItems value="#{editaEventoBean.listaFuncionarios}"
+							var="funcionario"
+							itemLabel="#{funcionario.matricula} | #{funcionario.nome}"
+							itemValue="#{funcionario}" />
+
+					</p:selectOneMenu>
+					<br />
+					<p:panel id="funcionarioInfo">
+
+						<p:panelGrid columns="10">
+
+							<p:outputLabel value="Nome" />
+							<p:outputLabel
+								value="#{editaEventoBean.eventoSelecionado.funcionario.nome}"
+								styleClass="label" />
+
+							<p:outputLabel value="CPF" />
+							<p:outputLabel
+								value="#{editaEventoBean.eventoSelecionado.funcionario.cpf}"
+								styleClass="label" />
+
+							<p:outputLabel value="Matricula" />
+							<p:outputLabel
+								value="#{editaEventoBean.eventoSelecionado.funcionario.matricula}"
+								styleClass="label" />
+
+							<p:outputLabel value="E-mail" />
+							<p:outputLabel
+								value="#{editaEventoBean.eventoSelecionado.funcionario.email}"
+								styleClass="label" />
+
+
+						</p:panelGrid>
+
+						<br />
+					</p:panel>
+
+				</p:panel>
+
+				<p:panel header="Lojas associadas">
+					<p:panelGrid columns="2">
+						<p:selectOneMenu converter="oneMenuConverter"
+							value="#{editaEventoBean.lojaSelecionada}" id="comboLojas">
+
+							<f:selectItem itemValue=""
+								itemLabel="Selecione as lojas participantes" />
+							<f:selectItems value="#{editaEventoBean.listaLojas}" var="loja"
+								itemLabel="#{loja.nome}" itemValue="#{loja}" />
+						</p:selectOneMenu>
+						<p:commandButton action="#{editaEventoBean.adicionaLoja()}"
+							value="Adicionar" update="comboLojas tableLojas growl" />
+					</p:panelGrid>
+
+					<p:dataTable
+						value="#{editaEventoBean.eventoSelecionado.listaLojas}"
+						id="tableLojas" var="lj">
+
+						<p:column headerText="Nome da loja">
+							<p:outputLabel value="#{lj.nome}" />
+						</p:column>
+
+						<p:column headerText="CNPJ da Loja">
+							<p:outputLabel value="#{lj.cnpj}" />
+						</p:column>
+
+						<p:column headerText="Telefone da Loja">
+							<p:outputLabel value="#{lj.telefone}" />
+						</p:column>
+
+						<p:column headerText="Email da Loja">
+							<p:outputLabel value="#{lj.email}" />
+						</p:column>
+
+						<p:column headerText="Número da Loja">
+							<p:outputLabel value="#{lj.numero}" />
+						</p:column>
+
+						<p:column headerText="Status da Loja">
+							<p:outputLabel value="#{lj.status.descricao}" />
+						</p:column>
+						<p:column headerText="Excluir Loja">
+							<p:commandButton icon="ui-icon-trash"
+								action="#{editaEventoBean.excluiLoja(lj)}" update="tableLojas" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+				<br />
+				<p:growl id="message" showDetail="true" />
+				<p:panelGrid columns="2" styleClass="semBorda">
+					<p:commandButton value="Salvar" action="#{editaEventoBean.salva}"
+						update="message">
+						<p:confirm header="Confirmação"
+							message="Tem certeza que deseja salvar o registro?"
+							icon="ui-icon-alert" />
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:commandButton>
+
+					<p:commandButton value="Cancelar"
+						action="#{editaEventoBean.cancela}" update="message">
+						<p:confirm header="Confirmação"
+							message="Tem certeza que deseja cancelar a edição? Todos os dados serão perdidos."
+							icon="ui-icon-alert" />
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:commandButton>
+				</p:panelGrid>
+
+			</p:panel>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

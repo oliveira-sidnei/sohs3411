@@ -1,0 +1,38 @@
+body {
+	background: #4C6AB0
+		repeating-linear-gradient(90deg, #4C6AB0, #4C6AB0 calc(50% - 210px),
+		#5073C3 calc(50% - 210px), #5073C3 calc(50% + 210px)) repeat scroll 0%
+		0%;
+}
+
+.ui-widget-content {
+	color: white;
+	background-color: #E0E0E0;
+	border: 0px; ! important;
+	background: transparent !important;
+}
+
+.imagemIcone {
+	background-image: url("../resources/imagens/indice.png");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+h2 {
+	margin-bottom: 10px
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.red {
+	color: #F44336;
+}
+
+#acessoNegado{
+	background: #4C6AB0
+		repeating-linear-gradient(90deg, #4C6AB0, #4C6AB0 calc(50% - 210px),
+		#4C6AB0 calc(50% - 210px), #4C6AB0 calc(50% + 210px)) repeat scroll 0%
+		0%;
+}

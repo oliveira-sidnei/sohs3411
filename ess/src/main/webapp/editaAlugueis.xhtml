@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="form">
+
+			<p:panel id="painelCadastraAlugueis" header="Cadastro de alugueis">
+				<br />
+				<p:panel id="lojaInfo">
+
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome" />
+						<p:outputLabel
+							value="#{editaAluguelBean.aluguelSelecionado.loja.nome}"
+							styleClass="label" />
+
+						<p:outputLabel value="CNPJ" />
+						<p:outputLabel
+							value="#{editaAluguelBean.aluguelSelecionado.loja.cnpj}"
+							styleClass="label" />
+
+						<p:outputLabel value="Numero" />
+						<p:outputLabel
+							value="#{editaAluguelBean.aluguelSelecionado.loja.numero}"
+							styleClass="label" />
+
+						<p:outputLabel value="Lojista" />
+						<p:outputLabel
+							value="#{editaAluguelBean.aluguelSelecionado.loja.lojista.nome}"
+							styleClass="label" />
+
+						<p:outputLabel value="Data de pagamento" styleClass="label" />
+						<p:calendar mask="true"
+							value="#{editaAluguelBean.aluguelSelecionado.dataPagamento}"
+							pattern="dd/MM/yyyy" />
+						<p:outputLabel value="Data de vencimento" styleClass="label" />
+						<p:calendar mask="true"
+							value="#{editaAluguelBean.aluguelSelecionado.dataVencimento}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Status" />
+						<p:selectOneMenu id="comboStatus"
+							value="#{editaAluguelBean.aluguelSelecionado.status}"
+							converter="oneMenuConverter">
+
+							<f:selectItems value="#{editaAluguelBean.listaStatus}"
+								var="status" itemLabel="#{status.descricao}" />
+
+						</p:selectOneMenu>
+
+
+					</p:panelGrid>
+
+					<br />
+
+				</p:panel>
+				<br />
+				<p:growl id="message" showDetail="true" />
+				<p:panel header="Despesa" toggleable="true">
+					<p:panelGrid columns="3" styleClass="semBorda">
+						<p:selectOneMenu id="despesasDisponiveisCombo"
+							value="#{editaAluguelBean.despesaSelecionada}"
+							converter="oneMenuConverter">
+
+							<f:selectItem itemLabel="Selecione a despesa" itemValue="" />
+							<f:selectItems value="#{editaAluguelBean.listaDespesas}"
+								var="despesa" itemValue="#{despesa}"
+								itemLabel="#{despesa.descricao}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Valor" />
+						<pe:inputNumber value="#{editaAluguelBean.valorSelecionado}" />
+						<p:commandButton value="Adicionar"
+							action="#{editaAluguelBean.incluiDespesa}"
+							update="form:despesasDisponiveisCombo despesasSelecionadasFieldset" />
+					</p:panelGrid>
+
+
+					<p:fieldset id="despesasSelecionadasFieldset"
+						legend="Despesas selecionadas" style="width:45%;margin-top:20px">
+						<p:outputPanel id="dropArea">
+							<h:outputText value="Nenhuma despesa selecionada."
+								rendered="#{empty editaAluguelBean.listaItensAluguel}"
+								style="font-size:24px;" />
+							<p:dataTable id="despesasSelecionadasTable" var="itemAluguel"
+								value="#{editaAluguelBean.listaItensAluguel}"
+								rendered="#{not empty editaAluguelBean.listaItensAluguel}">
+								<p:column headerText="Descrição">
+									<h:outputText value="#{itemAluguel.despesa.descricao}" />
+								</p:column>
+								<p:column headerText="Valor">
+									<p:outputLabel value="#{itemAluguel.valor}">
+										<f:convertNumber type="currency" currencySymbol="R$"
+											locale="pt_BR" />
+									</p:outputLabel>
+								</p:column>
+
+								<p:column headerText="Excluir" width="10%" style="center">
+									<div class="tableElement">
+										<p:commandButton icon="ui-icon-trash"
+											action="#{editaAluguelBean.removeDespesa(itemAluguel)}"
+											styleClass="botoesIcones" style="center"
+											update="form:despesasSelecionadasFieldset form:despesasDisponiveisCombo" />
+									</div>
+								</p:column>
+
+
+							</p:dataTable>
+						</p:outputPanel>
+					</p:fieldset>
+				</p:panel>
+			</p:panel>
+			<p:panelGrid columns="2" styleClass="semBorda">
+				<p:commandButton value="Salvar" action="#{editaAluguelBean.salva}" />
+
+				<p:commandButton value="Cancelar"
+					action="#{editaAluguelBean.cancela}">
+					<p:confirm header="Confirmação"
+						message="Tem certeza que deseja cancelar o cadastro? Todos os dados digitados serão perdidos."
+						icon="ui-icon-alert" />
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						icon="ui-icon-cancel">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:commandButton>
+			</p:panelGrid>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

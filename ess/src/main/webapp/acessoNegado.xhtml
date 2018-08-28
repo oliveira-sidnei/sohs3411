@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title>Easy Shop System</title>
+	<h:outputStylesheet library="css" name="login.css" />
+</h:head>
+
+<h:body id = "acessoNegado">
+	<h:form prependId="false">
+		<p:growl id="growl" />
+		<br />
+		<br />
+		<br />
+		<br />
+		<p:panelGrid columns="1" styleClass="ui-fluid center ui-noborder">
+
+			<h1>ACESSO NEGADO</h1>
+			<h2>Seu Perfil não possui acesso à esta página</h2>
+			<p:commandButton value = "Home Page" action="/intranetIndex?faces-redirect=true" style="center"/>
+
+		</p:panelGrid>
+
+	</h:form>
+</h:body>
+</html>
