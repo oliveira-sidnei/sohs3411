@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "ESS_STATUS")
@@ -18,6 +21,7 @@ public class Status implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@XmlTransient
 	private Integer id;
 	private String descricao;
 	
@@ -27,6 +31,7 @@ public class Status implements Serializable {
 	@OneToMany(mappedBy = "status", targetEntity = Funcionario.class, cascade = CascadeType.ALL)
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "status", targetEntity = Aluguel.class, cascade = CascadeType.ALL)
 	private List<Aluguel> alugueis = new ArrayList<Aluguel>();
 	

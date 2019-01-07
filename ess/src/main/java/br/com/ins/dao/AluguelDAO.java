@@ -102,7 +102,7 @@ public class AluguelDAO {
 
 	public List<Aluguel> listaAlugueisPendentes() {
 		List<Aluguel> listaAlugueis = this.em
-				.createQuery("select al from Aluguel al where al.status = 40", Aluguel.class).getResultList();
+				.createQuery("select al from Aluguel al where al.status in (40,55)", Aluguel.class).getResultList();
 		return listaAlugueis;
 	}
 

@@ -1,7 +1,5 @@
 package br.com.ins.dao;
 
-import java.math.BigInteger;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

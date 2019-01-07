@@ -2,7 +2,6 @@ package br.com.ins.services;
 
 import java.io.IOException;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;

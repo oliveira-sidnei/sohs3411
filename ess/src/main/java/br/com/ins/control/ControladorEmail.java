@@ -20,8 +20,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.firebirdsql.jdbc.parser.JaybirdSqlParser.nextValueExpression_return;
-
 import br.com.ins.bean.ControladorCliente;
 import br.com.ins.core.Cliente;
 import br.com.ins.core.Evento;

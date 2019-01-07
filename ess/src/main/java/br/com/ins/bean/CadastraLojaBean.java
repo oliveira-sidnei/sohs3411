@@ -15,7 +15,6 @@ import br.com.ins.control.ControladorLoja;
 import br.com.ins.control.ControladorLojista;
 import br.com.ins.control.ControladorMensagens;
 import br.com.ins.control.ControladorStatus;
-import br.com.ins.core.Funcionario;
 import br.com.ins.core.Loja;
 import br.com.ins.core.Lojista;
 import br.com.ins.core.Status;

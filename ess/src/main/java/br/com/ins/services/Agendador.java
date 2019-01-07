@@ -34,11 +34,11 @@ public class Agendador {
 	@EJB
 	ControladorLoja controladorLoja;
 
-	@Schedule(hour = "07")
-	public void divulgaEventos() {
-		controladorEmail.enviaEventosParaClientes();
-
-	}
+//	@Schedule(hour = "07")
+//	public void divulgaEventos() {
+//		controladorEmail.enviaEventosParaClientes();
+//
+//	}
 
 	@Schedule(hour = "*", minute = "*", second = "*/30", persistent = false)
 	public void modificaAceitoParaAtivo() throws ParseException {
@@ -51,12 +51,12 @@ public class Agendador {
 			Date dataInicio = sdf.parse(dataInicioString);
 			if (dataInicio.equals(dataAtual)) {
 
-				System.out.println("ATIVO " + evento.getNome());
+//				System.out.println("ATIVO " + evento.getNome());
 				evento.setStatus(controladorStatus.eventoAtivo());
 				
 				controladorEvento.atualizaEvento(evento);
 			}else{
-				System.out.println("ACEITO " + evento.getNome());
+//				System.out.println("ACEITO " + evento.getNome());
 				evento.setStatus(controladorStatus.eventoAceito());
 				
 				controladorEvento.atualizaEvento(evento);
@@ -78,11 +78,11 @@ public class Agendador {
 			String dataFimString = sdf.format(evento.getDataFim());
 			Date dataFim = sdf.parse(dataFimString);
 			if (dataAtual.after(dataFim)) {
-				System.out.println("TRUE " + evento.getNome());
+//				System.out.println("TRUE " + evento.getNome());
 				evento.setStatus(controladorStatus.eventoFinalizado());
 				controladorEvento.atualizaEvento(evento);
 			} else {
-				System.out.println("FALSE" + evento.getNome());
+//				System.out.println("FALSE" + evento.getNome());
 				evento.setStatus(controladorStatus.eventoAtivo());
 				controladorEvento.atualizaEvento(evento);
 			}

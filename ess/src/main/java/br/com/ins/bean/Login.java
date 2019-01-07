@@ -3,10 +3,8 @@ package br.com.ins.bean;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.ins.control.ControladorMensagens;

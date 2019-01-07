@@ -1,8 +1,6 @@
 package br.com.ins.control;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -117,7 +115,7 @@ public class ControladorAluguel implements Serializable {
 		byte[] bPDF = gerador.geraPDF();
 
 		// Para gerar um array de bytes a partir de um PNG
-		byte[] bPNG = gerador.geraPNG();
+//		byte[] bPNG = gerador.geraPNG();
 
 		StreamedContent content = new DefaultStreamedContent(new ByteArrayInputStream(bPDF), "application/x-download",
 				"boleto " + aluguelSelecionado.getLoja().getCnpj() + ".pdf");
